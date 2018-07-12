@@ -1,0 +1,4 @@
+HtmlEditorFieldShort:
+  config_class: YourOwnTinyMCE
+HTMLEditorFieldShort_Config:
+  number_of_rows: 3

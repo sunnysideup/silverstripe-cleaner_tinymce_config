@@ -3,8 +3,12 @@
 namespace Sunnysideup\CleanerTinyMCEConfig\Forms;
 
 use HtmlEditorField;
-use Injector;
-use Config;
+
+
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Core\Config\Config;
+use Sunnysideup\CleanerTinyMCEConfig\Forms\HtmlEditorFieldShort;
+
 
 
 
@@ -29,15 +33,15 @@ class HtmlEditorFieldShort extends HtmlEditorField
 
         $obj = Injector::inst()->createWithArgs($class, $args);
 
-        $configClass = Config::inst()->get('HtmlEditorFieldShort', 'config_class');
+        $configClass = Config::inst()->get(HtmlEditorFieldShort::class, 'config_class');
         $configClassObject = Injector::inst()->get($configClass);
-        $configName = Config::inst()->get('HtmlEditorFieldShort', 'default_config_name');
+        $configName = Config::inst()->get(HtmlEditorFieldShort::class, 'default_config_name');
 
         $configClassObject->setConfig($configName);
 
         $rows = $configClassObject->getNumberOfRows();
         if(! $rows) {
-            $rows = Config::inst()->get('HtmlEditorFieldShort', 'number_of_rows');
+            $rows = Config::inst()->get(HtmlEditorFieldShort::class, 'number_of_rows');
         }
         $obj->setRows($rows);
 

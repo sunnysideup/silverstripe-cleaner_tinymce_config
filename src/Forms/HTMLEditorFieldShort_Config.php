@@ -1,5 +1,11 @@
 <?php
 
+namespace Sunnysideup\CleanerTinyMCEConfig\Forms;
+
+use int;
+use HtmlEditorConfig;
+
+
 
 class HTMLEditorFieldShort_Config implements HTMLEditorFieldShort_ConfigInterface
 {

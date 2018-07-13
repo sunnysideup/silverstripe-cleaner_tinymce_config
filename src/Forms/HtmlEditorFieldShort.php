@@ -1,5 +1,12 @@
 <?php
 
+namespace Sunnysideup\CleanerTinyMCEConfig\Forms;
+
+use HtmlEditorField;
+use Injector;
+use Config;
+
+
 
 class HtmlEditorFieldShort extends HtmlEditorField
 {

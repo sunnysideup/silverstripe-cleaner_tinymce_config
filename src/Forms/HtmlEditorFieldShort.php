@@ -2,17 +2,16 @@
 
 namespace Sunnysideup\CleanerTinyMCEConfig\Forms;
 
-use HtmlEditorField;
-
 
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Config\Config;
+
+use  SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+
 use Sunnysideup\CleanerTinyMCEConfig\Forms\HtmlEditorFieldShort;
 
 
-
-
-class HtmlEditorFieldShort extends HtmlEditorField
+class HtmlEditorFieldShort extends HTMLEditorField
 {
 
     private static $config_class = 'HtmlEditorFieldShort_Config';

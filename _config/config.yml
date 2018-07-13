@@ -1,0 +1,6 @@
+---
+name: cleaner_tinymce_config
+---
+
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Forms\HTMLEditor\HTMLEditorField: Sunnysideup\CleanerTinyMCEConfig\Forms\HTMLEditorFieldShort

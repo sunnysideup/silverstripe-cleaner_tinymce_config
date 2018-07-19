@@ -1,4 +1,4 @@
 <?php
 
 
-Object::useCustomClass('HTMLEditorField',   'HTMLEditorFieldShort', true);
+Object::useCustomClass('HTMLEditorField', 'HTMLEditorFieldShort', true);

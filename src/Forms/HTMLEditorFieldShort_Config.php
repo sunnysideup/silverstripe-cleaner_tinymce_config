@@ -53,5 +53,4 @@ class HTMLEditorFieldShort_Config implements HTMLEditorFieldShort_ConfigInterfac
             '702px'
         );
     }
-
 }

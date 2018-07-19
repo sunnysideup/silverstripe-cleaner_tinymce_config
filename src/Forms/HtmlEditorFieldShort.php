@@ -6,36 +6,32 @@ namespace Sunnysideup\CleanerTinyMCEConfig\Forms;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Config\Config;
 
-use  SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-
-use Sunnysideup\CleanerTinyMCEConfig\Forms\HtmlEditorFieldShort;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 
 
-class HtmlEditorFieldShort extends HTMLEditorField
+
+class HTMLEditorFieldShort extends HTMLEditorField
 {
 
-    private static $config_class = 'HtmlEditorFieldShort_Config';
+    private static $config_class = 'Sunnysideup\CleanerTinyMCEConfig\Forms\HTMLEditorFieldShort_Config';
 
     private static $number_of_rows = 7;
 
     private static $default_config_name = 'cms';
 
-    public static function create(){
+    public static function create(...$args){
         $args = func_get_args();
 
         // Class to create should be the calling class if not Object,
         // otherwise the first parameter
-        $class = get_called_class();
-        if($class == 'Object') $class = array_shift($args);
-
-        $class = 'HtmlEditorField';
+        $class = 'SilverStripe\Forms\HTMLEditor\HTMLEditorField';
 
         $obj = Injector::inst()->createWithArgs($class, $args);
 
         $configClass = Config::inst()->get(HtmlEditorFieldShort::class, 'config_class');
         $configClassObject = Injector::inst()->get($configClass);
-        $configName = Config::inst()->get(HtmlEditorFieldShort::class, 'default_config_name');
 
+        $configName = Config::inst()->get(HtmlEditorFieldShort::class, 'default_config_name');
         $configClassObject->setConfig($configName);
 
         $rows = $configClassObject->getNumberOfRows();

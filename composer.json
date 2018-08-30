@@ -1,6 +1,6 @@
 {
     "name": "sunnysideup/cleaner_tinymce_config",
-    "type": "silverstripe-vendormodule",
+    "type": "silverstripe-module",
     "description": "Provides an easier and cleaner way to configure your TinyMCE manager. By default, you will also be provided with a simplified TinyMCE editor.",
     "keywords": [
         "Content Editor",
@@ -20,8 +20,10 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "~4.0",
-        "silverstripe/recipe-cms": "~1"
+        "silverstripe/framework": "~3.6",
+        "silverstripe/cms": "~3.6"
     },
-    "extra": []
+    "extra": {
+        "installer-name": "cleaner_tinymce_config"
+    }
 }

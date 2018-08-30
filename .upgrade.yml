@@ -1,0 +1,4 @@
+mappings:
+  HTMLEditorFieldShort: Sunnysideup\CleanerTinyMCEConfig\Forms\HTMLEditorFieldShort
+  HTMLEditorFieldShort_ConfigInterface: Sunnysideup\CleanerTinyMCEConfig\Forms\HTMLEditorFieldShort_ConfigInterface
+  HTMLEditorFieldShort_Config: Sunnysideup\CleanerTinyMCEConfig\Forms\HTMLEditorFieldShort_Config

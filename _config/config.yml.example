@@ -1,4 +1,9 @@
-HtmlEditorFieldShort:
-  config_class: YourOwnTinyMCE
-HTMLEditorFieldShort_Config:
+---
+Name: HTMLEditor
+---
+
+Sunnysideup\CleanerTinyMCEConfig\Forms\HTMLEditorFieldShort:
+  config_class: 'YourOwnClass'
+  default_config_name: 'myothercms'
+Sunnysideup\CleanerTinyMCEConfig\Forms\HTMLEditorFieldShort_Config:
   number_of_rows: 3

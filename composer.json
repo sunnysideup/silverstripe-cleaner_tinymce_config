@@ -20,8 +20,7 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "~4.0",
-        "silverstripe/recipe-cms": "~1"
+        "silverstripe/framework": "~4.0"
     },
     "extra": []
 }

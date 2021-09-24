@@ -1,6 +1,13 @@
 ---
 name: cleaner_tinymce_config
 ---
+SilverStripe\Forms\HTMLEditor\HTMLEditorField:
+  default_rows: 5
 
-SilverStripe\Core\Injector\Injector:
-  SilverStripe\Forms\HTMLEditor\HTMLEditorField: Sunnysideup\CleanerTinyMCEConfig\Forms\HTMLEditorFieldShort
+SilverStripe\Security\Group:
+  extensions:
+    - Sunnysideup\CleanerTinyMCEConfig\Extensions\HandyHtmlEditorConfig
+
+SilverStripe\Admin\LeftAndMain:
+  extensions:
+    - Sunnysideup\CleanerTinyMCEConfig\Extensions\HtmlEditorAdminExtension

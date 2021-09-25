@@ -1,73 +1,39 @@
 <?php
 
-namespace Sunnysideup\CleanerTinyMCEConfig\Config;
+namespace Sunnysideup\CleanerTinyMCEConfig\Forms;
 
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 /**
+ * example:
+ * ```yml
+ *     [
+ *         'config1' => [
+ *             'enabled_plugins' => [A, B, C],
+ *             'disabled_plugins' => [A, B, C],
+ *             'add_buttons' => [
+ *                 1: [A, B, C],
+ *                 2: [A, B, C],
+ *                 3: [A, B, C],
+ *             ],
+ *             'remove_buttons' => [A, B, C],
+ *             'add_macrons' => true,
+ *             'options' => [
+ *                 'skin' => 'silverstripe',
+ *                 'width' => '80ch',
+ *             ],
+ *             'block_formats' => [
+ *                 'p' => 'paragraph',
+ *                 'p' => 'paragraph',
+ *             ]
+ *         ]
+ *
+ *     ]
  *
  */
 
-use SilverStripe\Core\Injector\Injectable;
-use SilverStripe\Core\Config\Configurable;
-
-class HTMLEditorConfigOptions
+class HTMLEditorFieldShortConfig
 {
-    use Injectable;
 
-    use Configurable;
-
-
-    /**
-     *
-     * @var string
-     */
-    private static $main_editor = 'cms';
-
-    /**
-     *
-     * @var array
-     */
-    private static $remove_options = [
-        // 'cms',
-        // 'intro',
-        // 'heading',
-        // 'simple',
-        // 'supersimple',
-<<<<<<< HEAD:src/Config/HTMLEditorConfigOptions.php
-        // 'inline',
-=======
->>>>>>> 34a3e32432e4d765490b2f9dfe458dc3d0b5a49f:src/Forms/HTMLEditorConfigOptions.php
-    ];
-
-    /**
-     * example:
-     *
-     * ```php
-     *     [
-     *         'config1' => [
-     *             'enabled_plugins' => [A, B, C],
-     *             'disabled_plugins' => [A, B, C],
-     *             'add_buttons' => [
-     *                 1: [A, B, C],
-     *                 2: [A, B, C],
-     *                 3: [A, B, C],
-     *             ],
-     *             'remove_buttons' => [A, B, C],
-     *             'add_macrons' => true,
-     *             'options' => [
-     *                 'skin' => 'silverstripe',
-     *                 'width' => '80ch',
-     *             ],
-     *             'block_formats' => [
-     *                 'p' => 'paragraph',
-     *                 'p' => 'paragraph',
-     *             ]
-     *         ]
-     *
-     *     ]
-     * ```
-     * @var array
-     */
     private static $editor_configs = [
 
         'cms' => [
@@ -93,6 +59,28 @@ class HTMLEditorConfigOptions
         ],
 
 
+
+        'intro' => [
+            'disabled_plugins' => [
+                'ssembed',
+                'ssmedia',
+                'table',
+            ],
+            'remove_buttons' => [
+                'alignjustify',
+                'indent',
+                'outdent',
+                'bullist',
+                'numlist',
+            ],
+            'block_formats' => [
+                'p' => 'Paragraph',
+                'h1' => 'Heading 1',
+            ]
+        ],
+
+
+
         'heading' => [
             'disabled_plugins' => [
                 'ssembed',
@@ -114,25 +102,6 @@ class HTMLEditorConfigOptions
             ]
         ],
 
-
-        'intro' => [
-            'disabled_plugins' => [
-                'ssembed',
-                'ssmedia',
-                'table',
-            ],
-            'remove_buttons' => [
-                'alignjustify',
-                'indent',
-                'outdent',
-                'bullist',
-                'numlist',
-            ],
-            'block_formats' => [
-                'p' => 'Paragraph',
-                'h1' => 'Heading 1',
-            ]
-        ],
 
 
         'simple' => [
@@ -179,18 +148,6 @@ class HTMLEditorConfigOptions
                 'span' => 'span',
             ]
         ],
-
-<<<<<<< HEAD:src/Config/HTMLEditorConfigOptions.php
-        'inline' => [
-=======
-        'supersimple22' => [
->>>>>>> 34a3e32432e4d765490b2f9dfe458dc3d0b5a49f:src/Forms/HTMLEditorConfigOptions.php
-            'lines' => [
-                1 => 'formatselect,bold,italic,sslink,unlink',
-                2 => [],
-                3 => [],
-            ]
-        ]
     ];
 
 

@@ -158,8 +158,13 @@ class ApplyTinyMceConfigs
                         } else {
                             $lines[$i] = $this->stringToArray($lines[$i]);
                         }
+<<<<<<< HEAD
+                        $editor->setButtonsForLine($i, $lines);
+                    }
+=======
                     }
                     $editor->setButtonsForLine($lines);
+>>>>>>> 34a3e32432e4d765490b2f9dfe458dc3d0b5a49f
                 }
 
                 //options
@@ -206,8 +211,13 @@ class ApplyTinyMceConfigs
         if(! is_array($mixed)) {
             $mixed = explode(',', $mixed);
         }
+<<<<<<< HEAD
+        // $mixed = array_map('trim', $mixed);
+        // $mixed = array_filter($mixed);
+=======
         $mixed = array_map('trim', $mixed);
         $mixed = array_filter($linksArray);
+>>>>>>> 34a3e32432e4d765490b2f9dfe458dc3d0b5a49f
         return $mixed;
     }
 

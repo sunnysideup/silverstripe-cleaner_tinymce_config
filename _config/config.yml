@@ -6,7 +6,7 @@ SilverStripe\Forms\HTMLEditor\HTMLEditorField:
 
 SilverStripe\Security\Group:
   extensions:
-    - Sunnysideup\CleanerTinyMCEConfig\Extensions\HandyHtmlEditorConfig
+    - Sunnysideup\CleanerTinyMCEConfig\Extensions\GroupEditorConfig
 
 SilverStripe\Admin\LeftAndMain:
   extensions:

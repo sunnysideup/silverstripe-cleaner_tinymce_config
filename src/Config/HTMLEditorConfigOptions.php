@@ -33,10 +33,7 @@ class HTMLEditorConfigOptions
         // 'heading',
         // 'simple',
         // 'supersimple',
-<<<<<<< HEAD:src/Config/HTMLEditorConfigOptions.php
         // 'inline',
-=======
->>>>>>> 34a3e32432e4d765490b2f9dfe458dc3d0b5a49f:src/Forms/HTMLEditorConfigOptions.php
     ];
 
     /**
@@ -180,11 +177,7 @@ class HTMLEditorConfigOptions
             ]
         ],
 
-<<<<<<< HEAD:src/Config/HTMLEditorConfigOptions.php
         'inline' => [
-=======
-        'supersimple22' => [
->>>>>>> 34a3e32432e4d765490b2f9dfe458dc3d0b5a49f:src/Forms/HTMLEditorConfigOptions.php
             'lines' => [
                 1 => 'formatselect,bold,italic,sslink,unlink',
                 2 => [],

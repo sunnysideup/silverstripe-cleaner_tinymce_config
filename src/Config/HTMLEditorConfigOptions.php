@@ -21,7 +21,7 @@ class HTMLEditorConfigOptions
      *
      * @var string
      */
-    private static $main_editor = 'cms';
+    private static $main_editor = 'inline';
 
     /**
      *
@@ -32,9 +32,20 @@ class HTMLEditorConfigOptions
         // 'intro',
         // 'heading',
         // 'simple',
-        // 'supersimple',
-        // 'inline',
+        // 'supersimple'
     ];
+
+    public function getEditors() : array
+    {
+        $list = $this->config()->get('editor_configs');
+        foreach($list as $key => $entry) {
+            if(!empty($entry['based_on']) && !empty($list[$entry['based_on']])) {
+                $entry = array_merge_recursive($list[$entry['based_on']], $entry);
+            }
+            $list[$key] = $entry;
+        }
+        return $list;
+    }
 
     /**
      * example:
@@ -59,6 +70,9 @@ class HTMLEditorConfigOptions
      *                 'p' => 'paragraph',
      *                 'p' => 'paragraph',
      *             ]
+     *         ],
+     *         'config2' => [
+     *             'based_on' => 'config1'
      *         ]
      *
      *     ]
@@ -89,101 +103,90 @@ class HTMLEditorConfigOptions
             ],
         ],
 
-
-        'heading' => [
+        'inline' => [
             'disabled_plugins' => [
-                'ssembed',
-                'ssmedia',
                 'table',
-            ],
-            'remove_buttons' => [
-                'alignleft',
-                'aligncenter',
-                'alignright',
-                'alignjustify',
-                'indent',
-                'outdent',
-                'bullist',
-                'numlist',
-            ],
-            'block_formats' => [
-                'h2' => 'Heading 2',
-            ]
-        ],
-
-
-        'intro' => [
-            'disabled_plugins' => [
-                'ssembed',
-                'ssmedia',
-                'table',
-            ],
-            'remove_buttons' => [
-                'alignjustify',
-                'indent',
-                'outdent',
-                'bullist',
-                'numlist',
-            ],
-            'block_formats' => [
-                'p' => 'Paragraph',
-                'h1' => 'Heading 1',
-            ]
-        ],
-
-
-        'simple' => [
-            'disabled_plugins' => [
-                'ssembed',
-                'ssmedia',
-                'table',
-            ],
-            'remove_buttons' => [
-                'alignleft',
-                'aligncenter',
-                'alignright',
-                'alignjustify',
-                'indent',
-                'outdent',
-                'bullist',
-                'numlist',
-                'formatselect',
-            ],
-            'block_formats' => [
-                'p' => 'Paragraph',
-            ]
-        ],
-
-
-        'supersimple' => [
-            'disabled_plugins' => [
-                'ssembed',
-                'ssmedia',
-                'table',
-            ],
-            'remove_buttons' => [
-                'alignleft',
-                'aligncenter',
-                'alignright',
-                'alignjustify',
-                'indent',
-                'outdent',
-                'bullist',
-                'numlist',
-                'formatselect',
             ],
             'block_formats' => [
                 'span' => 'span',
+            ],
+            'charmap_append' => true,
+            'lines' => [
+                1 => [
+                    'formatselect',
+                    'styleselect',
+                    'removeformat',
+                    '|',
+                    'bold',
+                    'italic',
+                    'underline',
+                    '|',
+                    'sslink',
+                    'unlink',
+                    'anchor',
+                    '|',
+                    '|',
+                    'paste',
+                    'pastetext',
+                    '|',
+                    'charmap',
+                    'superscript',
+                    '|',
+                    'fullscreen',
+                    'code',
+
+                ],
             ]
         ],
 
-        'inline' => [
+        'paragraphs' => [
+            'based_on' => 'inline',
+            'block_formats' => [
+                'p' => 'paragraph',
+            ],
+
+        ],
+
+        'heading' => [
+            'based_on' => 'inline',
+            'block_formats' => [
+                'h2' => 'heading',
+            ],
+        ],
+
+        'basic' => [
+            'based_on' => 'inline',
+            'block_formats' => [
+                'h1' => 'heading 1',
+                'h2' => 'heading 2',
+                'h3' => 'heading 3',
+                'p' => 'paragraph',
+                'blockquote' => 'quote',
+            ],
             'lines' => [
-                1 => 'formatselect,bold,italic,sslink,unlink',
-                2 => [],
-                3 => [],
+
+                2 => [
+                    'bullist',
+                    'numlist',
+                    '|',
+                    'ssmedia',
+                    'ssembed',
+                ],
             ]
+
+        ],
+        'basicbutton' => [
+            'based_on' => 'basic',
+            'options' => [
+                'style_formats' => [
+                    'title' => 'Button-Link',
+                    'attributes' => ['class' => 'tiny-mce-button'],
+                    'selector' => 'a'
+                ],
+            ],
         ]
+
+
     ];
 
 

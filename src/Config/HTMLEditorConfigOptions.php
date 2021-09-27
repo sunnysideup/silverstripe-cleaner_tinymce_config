@@ -130,7 +130,6 @@ class HTMLEditorConfigOptions
                     'pastetext',
                     '|',
                     'charmap',
-                    'superscript',
                     '|',
                     'fullscreen',
                     'code',

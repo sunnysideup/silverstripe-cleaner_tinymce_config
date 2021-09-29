@@ -52,53 +52,55 @@ What is super useful is that you can take one of the recipes above and then use
 ```yml
 Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
   editor_configs:
-    custom:
-        based_on: basic
-        enabled_plugins:
-            - A
-            - B
-            - C
-        disabled_plugins:
-          - A
-          - B
-          - C
+    customconfig:
+      based_on: basic
+      enabled_plugins:
+        - A
+        - B
+        - C
+            
+      disabled_plugins:
+        - A
+        - B
+        - C
 
-        add_buttons:
-          1:
-              - A
-              - B
-              - C
-          2:
-            - A
-            - B
-            - C
-          3:
-            - A
-            - B
-            - C
-        lines:
-          1:
-              - A
-              - B
-              - C
-          2:
-            - A
-            - B
-            - C
-          3:
-            - A
-            - B
-            - C
-      remove_buttons:
+      add_buttons:
+        1:
           - A
           - B
           - C
+        2:
+          - A
+          - B
+          - C
+        3:
+          - A
+          - B
+         - C
+      lines:
+        1:
+          - A
+          - B
+          - C
+        2:
+          - A
+          - B
+          - C
+        3:
+          - A
+          - B
+          - C
+      remove_buttons:
+        - A
+        - B
+        - C
       add_macrons: true
       options:
-          skin: silverstripe'
-          width: 80ch
+        skin: silverstripe'
+        width: 80ch
       block_formats:
-          p: 'paragraph'
+        p: 'paragraph'
+        
 ```
 
 

@@ -101,3 +101,5 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
           p: 'paragraph'
 ```
 
+
+You may also consider using the `onBeforeWrite` method on DataObjects to clear more tags for, for example, inline content.

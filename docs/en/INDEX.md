@@ -41,6 +41,9 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 
 ### 3. add your own recipe (and use as above)
 
+What is super useful is that you can take one of the recipes above and then use 
+`based_on` to just remove / add a few buttons / etc....
+
 ```yml
 Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
   editor_configs:

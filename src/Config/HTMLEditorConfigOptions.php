@@ -2,13 +2,8 @@
 
 namespace Sunnysideup\CleanerTinyMCEConfig\Config;
 
-use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
-/**
- *
- */
-
-use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Core\Config\Configurable;
+use SilverStripe\Core\Injector\Injectable;
 
 class HTMLEditorConfigOptions
 {
@@ -16,15 +11,12 @@ class HTMLEditorConfigOptions
 
     use Configurable;
 
-
     /**
-     *
      * @var string
      */
     private static $main_editor = 'inline';
 
     /**
-     *
      * @var array
      */
     private static $remove_options = [
@@ -36,20 +28,8 @@ class HTMLEditorConfigOptions
         // 'basicbutton',
     ];
 
-    public function getEditors() : array
-    {
-        $list = $this->config()->get('editor_configs');
-        foreach($list as $key => $entry) {
-            if(!empty($entry['based_on']) && !empty($list[$entry['based_on']])) {
-                $entry = array_merge_recursive($list[$entry['based_on']], $entry);
-            }
-            $list[$key] = $entry;
-        }
-        return $list;
-    }
-
     /**
-     * example:
+     * example:.
      *
      * ```php
      *     [
@@ -78,10 +58,10 @@ class HTMLEditorConfigOptions
      *
      *     ]
      * ```
+     *
      * @var array
      */
     private static $editor_configs = [
-
         'cms' => [
             'disabled_plugins' => [
                 // 'ssembed',
@@ -137,9 +117,8 @@ class HTMLEditorConfigOptions
                     '|',
                     'fullscreen',
                     'code',
-
                 ],
-            ]
+            ],
         ],
 
         'paragraphs' => [
@@ -147,7 +126,6 @@ class HTMLEditorConfigOptions
             'block_formats' => [
                 'p' => 'paragraph',
             ],
-
         ],
 
         'heading' => [
@@ -167,7 +145,6 @@ class HTMLEditorConfigOptions
                 'blockquote' => 'quote',
             ],
             'lines' => [
-
                 2 => [
                     'bullist',
                     'numlist',
@@ -175,8 +152,7 @@ class HTMLEditorConfigOptions
                     'ssmedia',
                     'ssembed',
                 ],
-            ]
-
+            ],
         ],
         'basicbutton' => [
             'based_on' => 'basic',
@@ -184,13 +160,22 @@ class HTMLEditorConfigOptions
                 'style_formats' => [
                     'title' => 'Button-Link',
                     'attributes' => ['class' => 'tiny-mce-button'],
-                    'selector' => 'a'
+                    'selector' => 'a',
                 ],
             ],
-        ]
-
-
+        ],
     ];
 
+    public function getEditors(): array
+    {
+        $list = $this->config()->get('editor_configs');
+        foreach ($list as $key => $entry) {
+            if (! empty($entry['based_on']) && ! empty($list[$entry['based_on']])) {
+                $entry = array_merge_recursive($list[$entry['based_on']], $entry);
+            }
+            $list[$key] = $entry;
+        }
 
+        return $list;
+    }
 }

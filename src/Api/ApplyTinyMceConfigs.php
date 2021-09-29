@@ -1,24 +1,19 @@
 <?php
 
-
 namespace Sunnysideup\CleanerTinyMCEConfig\Api;
 
-use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
-use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
-use SilverStripe\Core\Injector\Injectable;
-use SilverStripe\Core\Config\Configurable;
-use SilverStripe\Core\Extension;
-use SilverStripe\Core\Config\Config;
-use SilverStripe\Core\Manifest\ModuleLoader;
-use SilverStripe\Core\Injector\Injector;
-
 use SilverStripe\Control\Director;
-
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Config\Configurable;
+use SilverStripe\Core\Injector\Injectable;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Core\Manifest\ModuleLoader;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
+use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
 
 class ApplyTinyMceConfigs
 {
-
     use Injectable;
 
     use Configurable;
@@ -33,12 +28,11 @@ class ApplyTinyMceConfigs
         $cmsModule = ModuleLoader::inst()->getManifest()->getModule('silverstripe/cms');
 
         foreach ($editorConfigs as $editorConfigName => $editorConfigSettings) {
-            if(! in_array($editorConfigName, $remove)) {
-
+            if (! in_array($editorConfigName, $remove, true)) {
                 $editor = TinyMCEConfig::get($editorConfigName);
 
                 // enable plugins
-                if(! empty($editorConfigSettings['enabled_plugins'])) {
+                if (! empty($editorConfigSettings['enabled_plugins'])) {
                     $editor->enablePlugins($editorConfigSettings['enabled_plugins']);
                 } else {
                     $editor->enablePlugins(
@@ -48,14 +42,14 @@ class ApplyTinyMceConfigs
                             'fullscreen',
                             'contextmenu',
                             'anchor',
-                            'sslink' =>          $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
-                            'sslinkexternal' =>  $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
-                            'sslinkemail' =>     $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
+                            'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
+                            'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
+                            'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
 
-                            'sslinkfile' =>      $assetsAdminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
+                            'sslinkfile' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
 
-                            'ssembed' =>         $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
-                            'ssmedia' =>         $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
+                            'ssembed' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
+                            'ssmedia' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
 
                             'sslinkinternal' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'),
                             'sslinkanchor' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-anchor.js'),
@@ -64,22 +58,22 @@ class ApplyTinyMceConfigs
                 }
 
                 // disable plugins
-                if(! empty($editorConfigSettings['disabled_plugins'])) {
+                if (! empty($editorConfigSettings['disabled_plugins'])) {
                     $editor->disablePlugins(
                         $this->stringToArray($editorConfigSettings['disabled_plugins'])
                     );
                 }
 
                 // add buttons
-                if(! empty($editorConfigSettings['add_buttons'])) {
+                if (! empty($editorConfigSettings['add_buttons'])) {
                     $addButtons = $this->stringToArray($editorConfigSettings['add_buttons']);
-                    foreach($addButtons as $line => $buttons) {
+                    foreach ($addButtons as $line => $buttons) {
                         $editor->addButtonsToLine($line, $buttons);
                     }
                 }
 
                 // remove buttons
-                if(! empty($editorConfigSettings['remove_buttons'])) {
+                if (! empty($editorConfigSettings['remove_buttons'])) {
                     $removeButtons = $this->stringToArray($editorConfigSettings['remove_buttons']);
                     $editor->removeButtons($removeButtons);
                 } else {
@@ -99,14 +93,13 @@ class ApplyTinyMceConfigs
                             'justifyright',
                             'strikethrough',
                             'justifyfull',
-                            'underline'
+                            'underline',
                         ]
                     );
                 }
 
-
                 // add macrons
-                if(! empty($editorConfigSettings['add_macrons'])) {
+                if (! empty($editorConfigSettings['add_macrons'])) {
                     $editor
                         ->addButtonsToLine(1, ['charmap'])
                         ->setOption(
@@ -123,14 +116,15 @@ class ApplyTinyMceConfigs
                                 ['333', 'o - macron'],
                                 ['363', 'u - macron'],
                             ]
-                        );
+                        )
+                    ;
                 }
 
                 // lines
-                if(! empty($editorConfigSettings['lines'])) {
+                if (! empty($editorConfigSettings['lines'])) {
                     $lines = $editorConfigSettings['lines'];
-                    for($i = 1; $i < 4; $i++) {
-                        if(! isset($lines[$i])) {
+                    for ($i = 1; $i < 4; ++$i) {
+                        if (! isset($lines[$i])) {
                             $lines[$i] = [];
                         } else {
                             $lines[$i] = $this->stringToArray($lines[$i]);
@@ -148,15 +142,15 @@ class ApplyTinyMceConfigs
                         'style_formats' => [],
                         'contextmenu' => 'sslink anchor ssmedia ssembed inserttable | cell row column deletetable',
                         'use_native_selects' => false,
-                        'paste_as_text'=> true,
-                        'paste_text_sticky'=> true,
-                        'paste_text_sticky_default'=> true,
-                        'paste_text_sticky_default'=> true,
-                        'width'=> '702px',
+                        'paste_as_text' => true,
+                        'paste_text_sticky' => true,
+                        'paste_text_sticky_default' => true,
+                        'paste_text_sticky_default' => true,
+                        'width' => '702px',
                         'mode' => 'none',
                         'body_class' => 'typography',
                         'document_base_url' => Director::absoluteBaseURL(),
-                        'cleanup_callback' => "sapphiremce_cleanup",
+                        'cleanup_callback' => 'sapphiremce_cleanup',
                         // 'valid_elements' => "@[id|class|style|title],a[id|rel|rev|dir|tabindex|accesskey|type|name|href|target|title"
                         //     . "|class],-strong/-b[class],-em/-i[class],-strike[class],-u[class],#p[id|dir|class|align|style]"
                         //     . ",-ol[class],"
@@ -185,20 +179,19 @@ class ApplyTinyMceConfigs
                         //     . 'meter[form|high|low|max|min|optimum|value],'
                         //     . 'cite,abbr,,b,article,aside,code,col,colgroup,details[open],dfn,figure,figcaption,'
                         //     . 'footer,header,kbd,mark,,nav,pre,q[cite],small,summary,time[datetime],var,ol[start|type]',
-
                     ]
                 );
 
-                if(! empty($editorConfigSettings['options'])) {
+                if (! empty($editorConfigSettings['options'])) {
                     $editor->setOptions($editorConfigSettings['options']);
                 }
 
                 // block formats
-                if(!empty($editorConfigSettings['block_formats'])) {
+                if (! empty($editorConfigSettings['block_formats'])) {
                     $blockFormats = $this->stringToArray($editorConfigSettings['block_formats']);
                     $blocks = [];
-                    foreach($editorConfigSettings['block_formats'] as $tag => $name) {
-                        $blocks[] = $name.'='.$tag;
+                    foreach ($editorConfigSettings['block_formats'] as $tag => $name) {
+                        $blocks[] = $name . '=' . $tag;
                     }
                     $formats = implode(';', $blocks);
                     $valids = implode(';', $blocks);
@@ -213,19 +206,18 @@ class ApplyTinyMceConfigs
             }
         }
         $default = Config::inst()->get(HTMLEditorConfigOptions::class, 'main_editor');
-        if($default) {
+        if ($default) {
             HTMLEditorConfig::set_active_identifier($default);
         }
     }
 
-    protected function stringToArray($mixed) : array
+    protected function stringToArray($mixed): array
     {
-        if(! is_array($mixed)) {
+        if (! is_array($mixed)) {
             $mixed = explode(',', $mixed);
         }
         // $mixed = array_map('trim', $mixed);
         // $mixed = array_filter($mixed);
         return $mixed;
     }
-
 }

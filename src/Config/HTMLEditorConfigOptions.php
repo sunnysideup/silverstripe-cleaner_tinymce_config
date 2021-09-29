@@ -29,10 +29,11 @@ class HTMLEditorConfigOptions
      */
     private static $remove_options = [
         // 'cms',
-        // 'intro',
+        // 'inline',
+        // 'paragraphs',
         // 'heading',
-        // 'simple',
-        // 'supersimple'
+        // 'basic',
+        // 'basicbutton',
     ];
 
     public function getEditors() : array
@@ -90,6 +91,9 @@ class HTMLEditorConfigOptions
                 'alignjustify',
                 'indent',
                 'outdent',
+            ],
+            'add_buttons' => [
+                2 => ['fullscreen'],
             ],
             'block_formats' => [
                 'p' => 'Paragraph',

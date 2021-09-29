@@ -12,6 +12,8 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Core\Injector\Injector;
 
+use SilverStripe\Control\Director;
+
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
 
 class ApplyTinyMceConfigs
@@ -69,15 +71,12 @@ class ApplyTinyMceConfigs
                 }
 
                 // add buttons
-                // if(! empty($editorConfigSettings['add_buttons'])) {
-                //     $addButtons = $this->stringToArray($editorConfigSettings['add_buttons']);
-                //     foreach($addButtons as $line => $buttons) {
-                //         $editor->addButtonsToLine($line, $buttons);
-                //     }
-                // } else {
-                //     $editor->addButtonsToLine(2, ['styleselect']);
-                //     $editor->addButtonsToLine(2, ['hr']);
-                // }
+                if(! empty($editorConfigSettings['add_buttons'])) {
+                    $addButtons = $this->stringToArray($editorConfigSettings['add_buttons']);
+                    foreach($addButtons as $line => $buttons) {
+                        $editor->addButtonsToLine($line, $buttons);
+                    }
+                }
 
                 // remove buttons
                 if(! empty($editorConfigSettings['remove_buttons'])) {
@@ -154,8 +153,42 @@ class ApplyTinyMceConfigs
                         'paste_text_sticky_default'=> true,
                         'paste_text_sticky_default'=> true,
                         'width'=> '702px',
+                        'mode' => 'none',
+                        'body_class' => 'typography',
+                        'document_base_url' => Director::absoluteBaseURL(),
+                        'cleanup_callback' => "sapphiremce_cleanup",
+                        // 'valid_elements' => "@[id|class|style|title],a[id|rel|rev|dir|tabindex|accesskey|type|name|href|target|title"
+                        //     . "|class],-strong/-b[class],-em/-i[class],-strike[class],-u[class],#p[id|dir|class|align|style]"
+                        //     . ",-ol[class],"
+                        //     . "-ul[class],"
+                        //     . "-li[class],br,img[id|dir|longdesc|usemap|class|src|border|alt=|title|width|height|align|data*],"
+                        //     . "-sub[class],-sup[class],-blockquote[dir|class],"
+                        //     . "-table[cellspacing|cellpadding|width|height|class|align|dir|id|style],"
+                        //     . "-tr[id|dir|class|rowspan|width|height|align|valign|bgcolor|background|bordercolor|style],"
+                        //     . "tbody[id|class|style],thead[id|class|style],tfoot[id|class|style],"
+                        //     . "#td[id|dir|class|colspan|rowspan|width|height|align|valign|scope|style|headers],"
+                        //     . "-th[id|dir|class|colspan|rowspan|width|height|align|valign|scope|style|headers],caption[id|dir|class],"
+                        //     . "-div[id|dir|class|align|style],-span[class|align|style],-pre[class|align],address[class|align],"
+                        //     . "-h1[id|dir|class|align|style],-h2[id|dir|class|align|style],-h3[id|dir|class|align|style],"
+                        //     . "-h4[id|dir|class|align|style],-h5[id|dir|class|align|style],-h6[id|dir|class|align|style],hr[class],"
+                        //     . "dd[id|class|title|dir],dl[id|class|title|dir],dt[id|class|title|dir],@[id,style,class]",
+                        // 'extended_valid_elements' =>
+                        //     'img[class|src|alt|title|hspace|vspace|width|height|align|name|usemap|data*],'
+                        //     . 'object[classid|codebase|width|height|data|type],'
+                        //     . 'embed[width|height|name|flashvars|src|bgcolor|align|play|loop|quality|'
+                        //     . 'allowscriptaccess|type|pluginspage|autoplay],'
+                        //     . 'param[name|value],'
+                        //     . 'map[class|name|id],'
+                        //     . 'area[shape|coords|href|target|alt],'
+                        //     . 'ins[cite|datetime],del[cite|datetime],'
+                        //     . 'menu[label|type],'
+                        //     . 'meter[form|high|low|max|min|optimum|value],'
+                        //     . 'cite,abbr,,b,article,aside,code,col,colgroup,details[open],dfn,figure,figcaption,'
+                        //     . 'footer,header,kbd,mark,,nav,pre,q[cite],small,summary,time[datetime],var,ol[start|type]',
+
                     ]
                 );
+
                 if(! empty($editorConfigSettings['options'])) {
                     $editor->setOptions($editorConfigSettings['options']);
                 }

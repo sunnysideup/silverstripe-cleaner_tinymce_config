@@ -7,7 +7,12 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
   main_editor: basic
 ```
 
+This will make all your TinyMCE editors in your project be `basic`.
+
 ### 2. set config for individual editors
+
+If you need different editors for different fields, then you can use configs on a case by case basis. 
+
 
 ```php
 

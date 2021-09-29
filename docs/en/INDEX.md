@@ -68,6 +68,19 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
             - A
             - B
             - C
+        lines:
+          1:
+              - A
+              - B
+              - C
+          2:
+            - A
+            - B
+            - C
+          3:
+            - A
+            - B
+            - C
       remove_buttons:
           - A
           - B
@@ -80,7 +93,7 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
           p: 'paragraph'
 ```
 
-# more notes
+# more notes scrambled from other places - just FYI.
 ##
 title: Custom embeds in the WYSIWYG editor
 summary: How to allow custom embeds in the TinyMCE HTML editor.

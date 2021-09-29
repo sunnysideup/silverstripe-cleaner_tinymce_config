@@ -39,7 +39,7 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 ```
 
 
-add your own recipe
+### 3. add your own recipe (and use as above)
 
 ```yml
 Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:

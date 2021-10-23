@@ -14,7 +14,7 @@ class HTMLEditorConfigOptions
     /**
      * @var string
      */
-    private static $main_editor = 'inline';
+    private static $main_editor = 'basic';
 
     /**
      * @var array

@@ -124,11 +124,7 @@ class ApplyTinyMceConfigs
                 if (! empty($editorConfigSettings['lines'])) {
                     $lines = $editorConfigSettings['lines'];
                     for ($i = 1; $i < 4; ++$i) {
-                        if (! isset($lines[$i])) {
-                            $lines[$i] = [];
-                        } else {
-                            $lines[$i] = $this->stringToArray($lines[$i]);
-                        }
+                        $lines[$i] = isset($lines[$i]) ? $this->stringToArray($lines[$i]) : [];
                         $editor->setButtonsForLine($i, implode(', ', $lines[$i]));
                     }
                 }

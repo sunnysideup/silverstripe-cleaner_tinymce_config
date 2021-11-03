@@ -132,6 +132,7 @@ class ApplyTinyMceConfigs
                 //options
                 $editor->setOptions(
                     [
+                        'fix_list_elements' => true,
                         'skin' => 'silverstripe',
                         'importcss_append' => true,
                         'style_formats_merge' => false,

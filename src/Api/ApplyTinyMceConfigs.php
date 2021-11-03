@@ -70,27 +70,27 @@ class ApplyTinyMceConfigs
                 if (! empty($editorConfigSettings['enabled_plugins'])) {
                     $editor->enablePlugins($editorConfigSettings['enabled_plugins']);
                 } else {
-                    $editor->enablePlugins(
-                        [
-                            'charmap',
-                            'hr',
-                            'fullscreen',
-                            'contextmenu',
-                            'anchor',
-                            'autolink',
-                            'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
-                            'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
-                            'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
+//                     $editor->enablePlugins(
+//                         [
+//                             'charmap',
+//                             'hr',
+//                             'fullscreen',
+//                             'contextmenu',
+//                             'anchor',
+//                             'autolink',
+//                             'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
+//                             'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
+//                             'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
 
-                            'sslinkfile' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
+//                             'sslinkfile' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
 
-                            'ssembed' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
-                            'ssmedia' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
+//                             'ssembed' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
+//                             'ssmedia' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
 
-                            'sslinkinternal' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'),
-                            'sslinkanchor' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-anchor.js'),
-                        ]
-                    );
+//                             'sslinkinternal' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'),
+//                             'sslinkanchor' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-anchor.js'),
+//                         ]
+//                     );
                 }
 
                 // disable plugins
@@ -113,31 +113,31 @@ class ApplyTinyMceConfigs
                     $removeButtons = $this->stringToArray($editorConfigSettings['remove_buttons']);
                     $editor->removeButtons($removeButtons);
                 } else {
-                    $editor->removeButtons(
-                        [
-                            'outdent',
-                            'indent',
-                            // 'numlist',
-                            'hr',
-                            'pastetext',
-                            'pasteword',
-                            'visualaid',
-                            'anchor',
-                            'tablecontrols',
-                            'justifyleft',
-                            'justifycenter',
-                            'justifyright',
-                            'strikethrough',
-                            'justifyfull',
-                            'underline',
-                        ]
-                    );
+//                     $editor->removeButtons(
+//                         [
+//                             'outdent',
+//                             'indent',
+//                             // 'numlist',
+//                             'hr',
+//                             'pastetext',
+//                             'pasteword',
+//                             'visualaid',
+//                             'anchor',
+//                             'tablecontrols',
+//                             'justifyleft',
+//                             'justifycenter',
+//                             'justifyright',
+//                             'strikethrough',
+//                             'justifyfull',
+//                             'underline',
+//                         ]
+//                     );
                 }
 
                 // add macrons
                 if (! empty($editorConfigSettings['add_macrons'])) {
                     $editor
-                        ->addButtonsToLine(1, ['charmap'])
+//                         ->addButtonsToLine(1, ['charmap'])
                         ->setOption(
                             'charmap_append',
                             [

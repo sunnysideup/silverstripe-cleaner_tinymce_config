@@ -42,6 +42,7 @@ class ApplyTinyMceConfigs
                             'fullscreen',
                             'contextmenu',
                             'anchor',
+                            'autolink',
                             'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
                             'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
                             'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),

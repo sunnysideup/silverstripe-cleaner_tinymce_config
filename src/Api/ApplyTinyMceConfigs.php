@@ -146,6 +146,16 @@ class ApplyTinyMceConfigs
                         'body_class' => 'typography',
                         'document_base_url' => Director::absoluteBaseURL(),
                         'cleanup_callback' => 'sapphiremce_cleanup',
+                        'browser_spellcheck' => true,
+                        'statusbar' => true,
+                        'elementpath' => true, // https://www.tinymce.com/docs/configure/editor-appearance/#elementpath
+                        'relative_urls' => true,
+                        'remove_script_host' => true,
+                        'convert_urls' => false, // Prevent site-root images being rewritten to base relative
+                        'menubar' => false,
+                        'language' => 'en',
+                        'branding' => false,
+                        'upload_folder_id' => null, // Set folder ID for insert media dialog                        
                         'valid_elements' => "@[id|class|style|title],a[id|rel|rev|dir|tabindex|accesskey|type|name|href|target|title"
                             . "|class],-strong/-b[class],-em/-i[class],-strike[class],-u[class],#p[id|dir|class|align|style]"
                             . ",-ol[class],"

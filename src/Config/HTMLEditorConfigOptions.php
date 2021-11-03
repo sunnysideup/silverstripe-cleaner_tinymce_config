@@ -63,10 +63,6 @@ class HTMLEditorConfigOptions
      */
     private static $editor_configs = [
         'cms' => [
-            'disabled_plugins' => [
-                // 'ssembed',
-                // 'table',
-            ],
             'remove_buttons' => [
                 'alignjustify',
                 'indent',

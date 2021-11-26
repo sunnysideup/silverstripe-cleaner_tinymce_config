@@ -36,9 +36,9 @@ class ApplyTinyMceConfigs
                         'contextmenu' => null,
                         'image' => null,
                         'anchor' => null,
-                        'sslink' => $module->getResource('client/dist/js/TinyMCE_sslink.js'),
-                        'sslinkexternal' => $module->getResource('client/dist/js/TinyMCE_sslink-external.js'),
-                        'sslinkemail' => $module->getResource('client/dist/js/TinyMCE_sslink-email.js'),
+                        'sslink' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink.js'),
+                        'sslinkexternal' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
+                        'sslinkemail' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
                     ])
                     ->setOptions([
                         'friendly_name' => 'Default CMS',
@@ -192,7 +192,7 @@ class ApplyTinyMceConfigs
                         'menubar' => false,
                         'language' => 'en',
                         'branding' => false,
-                        'upload_folder_id' => null, // Set folder ID for insert media dialog                        
+                        'upload_folder_id' => null, // Set folder ID for insert media dialog
                         'valid_elements' => "@[id|class|style|title],a[id|rel|rev|dir|tabindex|accesskey|type|name|href|target|title"
                             . "|class],-strong/-b[class],-em/-i[class],-strike[class],-u[class],#p[id|dir|class|align|style]"
                             . ",-ol[class],"

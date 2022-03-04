@@ -36,9 +36,9 @@ class ApplyTinyMceConfigs
                         'contextmenu' => null,
                         'image' => null,
                         'anchor' => null,
-                        'sslink' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink.js'),
-                        'sslinkexternal' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
-                        'sslinkemail' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
+                        'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
+                        'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
+                        'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
                     ])
                     ->setOptions([
                         'friendly_name' => 'Default CMS',

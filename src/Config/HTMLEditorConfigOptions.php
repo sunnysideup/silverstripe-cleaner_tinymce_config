@@ -130,7 +130,6 @@ class HTMLEditorConfigOptions
         ],
 
         'basic' => [
-            'based_on' => 'inline',
             'block_formats' => [
                 'h1' => 'heading 1',
                 'h2' => 'heading 2',

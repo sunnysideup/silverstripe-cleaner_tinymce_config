@@ -37,6 +37,7 @@ class ApplyTinyMceConfigs
                         'image' => null,
                         'anchor' => null,
                         'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
+                        'sslinkinternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'),
                         'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
                         'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
                     ])

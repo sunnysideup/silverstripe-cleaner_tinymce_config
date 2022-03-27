@@ -1,7 +1,7 @@
 <?php
 
 namespace Sunnysideup\CleanerTinyMCEConfig\Api;
-
+use SilverStripe\View\Parsers\ShortcodeParser;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Config\Configurable;
@@ -11,6 +11,7 @@ use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
+use SilverStripe\CMS\Model\SiteTree;
 
 class ApplyTinyMceConfigs
 {
@@ -30,16 +31,23 @@ class ApplyTinyMceConfigs
         foreach ($editorConfigs as $editorConfigName => $editorConfigSettings) {
             if (! in_array($editorConfigName, $remove, true)) {
                 $editor = TinyMCEConfig::get($editorConfigName);
-                /** @var TinyMCEConfig $editorConfig */
+                /**
+                 * Register the default internal shortcodes.
+                 */
+                ShortcodeParser::get('default')->register(
+                    'sitetree_link',
+                    [SiteTree::class, 'link_shortcode_handler']
+                );
                 $editor
                     ->enablePlugins([
                         'contextmenu' => null,
                         'image' => null,
                         'anchor' => null,
-                        'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
-                        'sslinkinternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'),
+                        'sslink' =>         $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
+                        'sslinkinternal' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'),
+                        'sslinkanchor' =>   $cmsModule->getResource('client/dist/js/TinyMCE_sslink-anchor.js'),
                         'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
-                        'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
+                        'sslinkemail' =>    $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
                     ])
                     ->setOptions([
                         'friendly_name' => 'Default CMS',

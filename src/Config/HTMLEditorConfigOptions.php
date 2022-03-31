@@ -130,6 +130,7 @@ class HTMLEditorConfigOptions
         ],
 
         'basic' => [
+            'charmap_append' => true,
             'block_formats' => [
                 'h1' => 'heading 1',
                 'h2' => 'heading 2',
@@ -149,12 +150,12 @@ class HTMLEditorConfigOptions
                     '|',
                     'sslink',
                     'unlink',
-                    'anchor',                    
-                    '|',                    
+                    'anchor',
+                    '|',
                     'bullist',
                     'numlist',
 
-                ],            
+                ],
                 2 => [
                     'ssmedia',
                     'ssembed',

@@ -39,6 +39,7 @@ class ApplyTinyMceConfigs
                     'sitetree_link',
                     [SiteTree::class, 'link_shortcode_handler']
                 );
+                $editor->enablePlugins('charmap', 'fullscreen');
                 $editor
                     ->enablePlugins([
                         'contextmenu' => null,
@@ -53,6 +54,7 @@ class ApplyTinyMceConfigs
                         //media ...
                         'ssmedia' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
                         'ssembed' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
+                        'visualchars'
                     ])
                     ->setOptions([
                         'friendly_name' => 'Default CMS',
@@ -125,7 +127,7 @@ class ApplyTinyMceConfigs
                 // add macrons
                 if (! empty($editorConfigSettings['add_macrons'])) {
                     $editor
-//                         ->addButtonsToLine(1, ['charmap'])
+                        ->addButtonsToLine(1, ['charmap'])
                         ->setOption(
                             'charmap_append',
                             [
@@ -161,7 +163,7 @@ class ApplyTinyMceConfigs
                         'importcss_append' => true,
                         'style_formats_merge' => false,
                         'style_formats' => [],
-                        'contextmenu' => 'sslink anchor ssmedia ssembed inserttable | cell row column deletetable',
+                        'contextmenu' => 'sslink anchor ssmedia ssembed',
                         'use_native_selects' => false,
                         'paste_as_text' => true,
                         'paste_text_sticky' => true,
@@ -187,11 +189,6 @@ class ApplyTinyMceConfigs
                             . "-ul[class],"
                             . "-li[class],br,img[id|dir|longdesc|usemap|class|src|border|alt=|title|width|height|align|data*],"
                             . "-sub[class],-sup[class],-blockquote[dir|class],"
-                            . "-table[cellspacing|cellpadding|width|height|class|align|dir|id|style],"
-                            . "-tr[id|dir|class|rowspan|width|height|align|valign|bgcolor|background|bordercolor|style],"
-                            . "tbody[id|class|style],thead[id|class|style],tfoot[id|class|style],"
-                            . "#td[id|dir|class|colspan|rowspan|width|height|align|valign|scope|style|headers],"
-                            . "-th[id|dir|class|colspan|rowspan|width|height|align|valign|scope|style|headers],caption[id|dir|class],"
                             . "-div[id|dir|class|align|style],-span[class|align|style],-pre[class|align],address[class|align],"
                             . "-h1[id|dir|class|align|style],-h2[id|dir|class|align|style],-h3[id|dir|class|align|style],"
                             . "-h4[id|dir|class|align|style],-h5[id|dir|class|align|style],-h6[id|dir|class|align|style],hr[class],"

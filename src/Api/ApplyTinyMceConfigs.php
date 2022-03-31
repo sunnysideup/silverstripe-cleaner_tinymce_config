@@ -28,6 +28,7 @@ class ApplyTinyMceConfigs
         $cmsModule = ModuleLoader::inst()->getManifest()->getModule('silverstripe/cms');
 
         foreach ($editorConfigs as $editorConfigName => $editorConfigSettings) {
+
             if (! in_array($editorConfigName, $remove, true)) {
                 $editor = TinyMCEConfig::get($editorConfigName);
                 /** @var TinyMCEConfig $editorConfig */
@@ -37,8 +38,11 @@ class ApplyTinyMceConfigs
                         'image' => null,
                         'anchor' => null,
                         'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
+                        'sslinkfile' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
                         'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
                         'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
+                        'ssmedia' => $adminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
+                        'sslinkfile' => $adminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
                     ])
                     ->setOptions([
                         'friendly_name' => 'Default CMS',
@@ -68,29 +72,30 @@ class ApplyTinyMceConfigs
                 $editor->insertButtonsAfter('sslink', 'anchor');
                 // enable plugins
                 if (! empty($editorConfigSettings['enabled_plugins'])) {
+                    //print_r($cmsModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'));
                     $editor->enablePlugins($editorConfigSettings['enabled_plugins']);
                 } else {
-//                     $editor->enablePlugins(
-//                         [
-//                             'charmap',
-//                             'hr',
-//                             'fullscreen',
-//                             'contextmenu',
-//                             'anchor',
-//                             'autolink',
-//                             'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
-//                             'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
-//                             'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
-
-//                             'sslinkfile' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
-
-//                             'ssembed' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
-//                             'ssmedia' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
-
-//                             'sslinkinternal' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'),
-//                             'sslinkanchor' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-anchor.js'),
-//                         ]
-//                     );
+                    $editor->enablePlugins(
+                        [
+                            // 'charmap',
+                            // 'hr',
+                            // 'fullscreen',
+                            // 'contextmenu',
+                            // 'anchor',
+                            //'autolink',
+                            // 'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
+                            // 'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
+                            // 'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
+                            //
+                            // 'sslinkfile' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
+                            //
+                            // 'ssembed' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
+                            // 'ssmedia' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
+                            //
+                            // 'sslinkinternal' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'),
+                            // 'sslinkanchor' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-anchor.js'),
+                        ]
+                    );
                 }
 
                 // disable plugins

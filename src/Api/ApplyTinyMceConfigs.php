@@ -1,7 +1,7 @@
 <?php
 
 namespace Sunnysideup\CleanerTinyMCEConfig\Api;
-
+use SilverStripe\View\Parsers\ShortcodeParser;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Config\Configurable;
@@ -11,6 +11,7 @@ use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
+use SilverStripe\CMS\Model\SiteTree;
 
 class ApplyTinyMceConfigs
 {
@@ -31,7 +32,13 @@ class ApplyTinyMceConfigs
 
             if (! in_array($editorConfigName, $remove, true)) {
                 $editor = TinyMCEConfig::get($editorConfigName);
-                /** @var TinyMCEConfig $editorConfig */
+                /**
+                 * Register the default internal shortcodes.
+                 */
+                ShortcodeParser::get('default')->register(
+                    'sitetree_link',
+                    [SiteTree::class, 'link_shortcode_handler']
+                );
                 $editor
                     ->enablePlugins([
                         'contextmenu' => null,

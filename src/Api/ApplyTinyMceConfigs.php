@@ -45,11 +45,11 @@ class ApplyTinyMceConfigs
                         'image' => null,
                         'anchor' => null,
                         'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
-                        'sslinkfile' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
+                        'sslinkfile' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
                         'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
                         'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
-                        'ssmedia' => $adminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
-                        'sslinkfile' => $adminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
+                        'ssmedia' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
+                        'ssembed' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
                     ])
                     ->setOptions([
                         'friendly_name' => 'Default CMS',

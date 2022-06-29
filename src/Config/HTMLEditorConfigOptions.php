@@ -166,7 +166,6 @@ class HTMLEditorConfigOptions
                     '|',
                     'bullist',
                     'numlist',
-
                 ],
             ],
         ],
@@ -189,6 +188,7 @@ class HTMLEditorConfigOptions
             if (! empty($entry['based_on']) && ! empty($list[$entry['based_on']])) {
                 $entry = array_merge_recursive($list[$entry['based_on']], $entry);
             }
+
             $list[$key] = $entry;
         }
 

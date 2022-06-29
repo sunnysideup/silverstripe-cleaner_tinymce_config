@@ -1,7 +1,7 @@
 <?php
 
 namespace Sunnysideup\CleanerTinyMCEConfig\Api;
-use SilverStripe\View\Parsers\ShortcodeParser;
+
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Config\Configurable;
@@ -10,8 +10,8 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
+use SilverStripe\View\Parsers\ShortcodeParser;
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
-use SilverStripe\CMS\Model\SiteTree;
 
 class ApplyTinyMceConfigs
 {
@@ -29,15 +29,14 @@ class ApplyTinyMceConfigs
         $cmsModule = ModuleLoader::inst()->getManifest()->getModule('silverstripe/cms');
 
         foreach ($editorConfigs as $editorConfigName => $editorConfigSettings) {
-
             if (! in_array($editorConfigName, $remove, true)) {
                 $editor = TinyMCEConfig::get($editorConfigName);
-                /**
-                 * Register the default internal shortcodes.
-                 */
+                // Register the default internal shortcodes.
                 ShortcodeParser::get('default')->register(
                     'sitetree_link',
-                    [SiteTree::class, 'link_shortcode_handler']
+                    function (array $arguments, ?string $content = null, ?ShortcodeParser $parser = null): string {
+                        return \SilverStripe\CMS\Model\SiteTree::link_shortcode_handler($arguments, $content, $parser);
+                    }
                 );
                 $editor->enablePlugins('charmap', 'fullscreen');
                 $editor
@@ -45,41 +44,42 @@ class ApplyTinyMceConfigs
                         'contextmenu' => null,
                         'image' => null,
                         'anchor' => null,
-                        'sslink' =>           $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
-                        'sslinkinternal' =>   $cmsModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'),
-                        'sslinkanchor' =>     $cmsModule->getResource('client/dist/js/TinyMCE_sslink-anchor.js'),
-                        'sslinkfile' =>       $assetsAdminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
-                        'sslinkexternal' =>   $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
-                        'sslinkemail' =>      $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
+                        'sslink' => $adminModule->getResource('client/dist/js/TinyMCE_sslink.js'),
+                        'sslinkinternal' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-internal.js'),
+                        'sslinkanchor' => $cmsModule->getResource('client/dist/js/TinyMCE_sslink-anchor.js'),
+                        'sslinkfile' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_sslink-file.js'),
+                        'sslinkexternal' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-external.js'),
+                        'sslinkemail' => $adminModule->getResource('client/dist/js/TinyMCE_sslink-email.js'),
                         //media ...
                         'ssmedia' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssmedia.js'),
                         'ssembed' => $assetsAdminModule->getResource('client/dist/js/TinyMCE_ssembed.js'),
-                        'visualchars'
+                        'visualchars',
                     ])
                     ->setOptions([
                         'friendly_name' => 'Default CMS',
                         'priority' => '50',
                         'skin' => 'silverstripe',
                         'body_class' => 'typography',
-                        'contextmenu' => "sslink anchor ssmedia ssembed inserttable | cell row column deletetable",
+                        'contextmenu' => 'sslink anchor ssmedia ssembed inserttable | cell row column deletetable',
                         'use_native_selects' => false,
-                        'valid_elements' => "@[id|class|style|title],a[id|rel|rev|dir|tabindex|accesskey|type|name|href|target|title"
-                            . "|class],-strong/-b[class],-em/-i[class],-strike[class],-u[class],#p[id|dir|class|align|style],-ol[class],"
-                            . "-ul[class],-li[class],br,img[id|dir|longdesc|usemap|class|src|border|alt=|title|width|height|align|data*],"
-                            . "-sub[class],-sup[class],-blockquote[dir|class],-cite[dir|class|id|title],"
-                            . "-table[cellspacing|cellpadding|width|height|class|align|summary|dir|id|style],"
-                            . "-tr[id|dir|class|rowspan|width|height|align|valign|bgcolor|background|bordercolor|style],"
-                            . "tbody[id|class|style],thead[id|class|style],tfoot[id|class|style],"
-                            . "#td[id|dir|class|colspan|rowspan|width|height|align|valign|scope|style],"
-                            . "-th[id|dir|class|colspan|rowspan|width|height|align|valign|scope|style],caption[id|dir|class],"
-                            . "-div[id|dir|class|align|style],-span[class|align|style],-pre[class|align],address[class|align],"
-                            . "-h1[id|dir|class|align|style],-h2[id|dir|class|align|style],-h3[id|dir|class|align|style],"
-                            . "-h4[id|dir|class|align|style],-h5[id|dir|class|align|style],-h6[id|dir|class|align|style],hr[class],"
-                            . "dd[id|class|title|dir],dl[id|class|title|dir],dt[id|class|title|dir]",
-                        'extended_valid_elements' => "img[class|src|alt|title|hspace|vspace|width|height|align|name"
-                            . "|usemap|data*],iframe[src|name|width|height|align|frameborder|marginwidth|marginheight|scrolling],"
-                            . "object[width|height|data|type],param[name|value],map[class|name|id],area[shape|coords|href|target|alt]"
-                    ]);
+                        'valid_elements' => '@[id|class|style|title],a[id|rel|rev|dir|tabindex|accesskey|type|name|href|target|title'
+                            . '|class],-strong/-b[class],-em/-i[class],-strike[class],-u[class],#p[id|dir|class|align|style],-ol[class],'
+                            . '-ul[class],-li[class],br,img[id|dir|longdesc|usemap|class|src|border|alt=|title|width|height|align|data*],'
+                            . '-sub[class],-sup[class],-blockquote[dir|class],-cite[dir|class|id|title],'
+                            . '-table[cellspacing|cellpadding|width|height|class|align|summary|dir|id|style],'
+                            . '-tr[id|dir|class|rowspan|width|height|align|valign|bgcolor|background|bordercolor|style],'
+                            . 'tbody[id|class|style],thead[id|class|style],tfoot[id|class|style],'
+                            . '#td[id|dir|class|colspan|rowspan|width|height|align|valign|scope|style],'
+                            . '-th[id|dir|class|colspan|rowspan|width|height|align|valign|scope|style],caption[id|dir|class],'
+                            . '-div[id|dir|class|align|style],-span[class|align|style],-pre[class|align],address[class|align],'
+                            . '-h1[id|dir|class|align|style],-h2[id|dir|class|align|style],-h3[id|dir|class|align|style],'
+                            . '-h4[id|dir|class|align|style],-h5[id|dir|class|align|style],-h6[id|dir|class|align|style],hr[class],'
+                            . 'dd[id|class|title|dir],dl[id|class|title|dir],dt[id|class|title|dir]',
+                        'extended_valid_elements' => 'img[class|src|alt|title|hspace|vspace|width|height|align|name'
+                            . '|usemap|data*],iframe[src|name|width|height|align|frameborder|marginwidth|marginheight|scrolling],'
+                            . 'object[width|height|data|type],param[name|value],map[class|name|id],area[shape|coords|href|target|alt]',
+                    ])
+                ;
                 // enable ability to insert anchors
                 $editor->insertButtonsAfter('sslink', 'anchor');
 
@@ -102,7 +102,8 @@ class ApplyTinyMceConfigs
                 if (! empty($editorConfigSettings['remove_buttons'])) {
                     $removeButtons = $this->stringToArray($editorConfigSettings['remove_buttons']);
                     $editor->removeButtons($removeButtons);
-                } else {
+                }
+
 //                     $editor->removeButtons(
 //                         [
 //                             'outdent',
@@ -122,7 +123,6 @@ class ApplyTinyMceConfigs
 //                             'underline',
 //                         ]
 //                     );
-                }
 
                 // add macrons
                 if (! empty($editorConfigSettings['add_macrons'])) {
@@ -183,18 +183,17 @@ class ApplyTinyMceConfigs
                         'language' => 'en',
                         'branding' => false,
                         'upload_folder_id' => null, // Set folder ID for insert media dialog
-                        'valid_elements' => "@[id|class|style|title],a[id|rel|rev|dir|tabindex|accesskey|type|name|href|target|title"
-                            . "|class],-strong/-b[class],-em/-i[class],-strike[class],-u[class],#p[id|dir|class|align|style]"
-                            . ",-ol[class],"
-                            . "-ul[class],"
-                            . "-li[class],br,img[id|dir|longdesc|usemap|class|src|border|alt=|title|width|height|align|data*],"
-                            . "-sub[class],-sup[class],-blockquote[dir|class],"
-                            . "-div[id|dir|class|align|style],-span[class|align|style],-pre[class|align],address[class|align],"
-                            . "-h1[id|dir|class|align|style],-h2[id|dir|class|align|style],-h3[id|dir|class|align|style],"
-                            . "-h4[id|dir|class|align|style],-h5[id|dir|class|align|style],-h6[id|dir|class|align|style],hr[class],"
-                            . "dd[id|class|title|dir],dl[id|class|title|dir],dt[id|class|title|dir],@[id,style,class]",
-                        'extended_valid_elements' =>
-                            'img[class|src|alt|title|hspace|vspace|width|height|align|name|usemap|data*],'
+                        'valid_elements' => '@[id|class|style|title],a[id|rel|rev|dir|tabindex|accesskey|type|name|href|target|title'
+                            . '|class],-strong/-b[class],-em/-i[class],-strike[class],-u[class],#p[id|dir|class|align|style]'
+                            . ',-ol[class],'
+                            . '-ul[class],'
+                            . '-li[class],br,img[id|dir|longdesc|usemap|class|src|border|alt=|title|width|height|align|data*],'
+                            . '-sub[class],-sup[class],-blockquote[dir|class],'
+                            . '-div[id|dir|class|align|style],-span[class|align|style],-pre[class|align],address[class|align],'
+                            . '-h1[id|dir|class|align|style],-h2[id|dir|class|align|style],-h3[id|dir|class|align|style],'
+                            . '-h4[id|dir|class|align|style],-h5[id|dir|class|align|style],-h6[id|dir|class|align|style],hr[class],'
+                            . 'dd[id|class|title|dir],dl[id|class|title|dir],dt[id|class|title|dir],@[id,style,class]',
+                        'extended_valid_elements' => 'img[class|src|alt|title|hspace|vspace|width|height|align|name|usemap|data*],'
                             . 'object[classid|codebase|width|height|data|type],'
                             . 'embed[width|height|name|flashvars|src|bgcolor|align|play|loop|quality|'
                             . 'allowscriptaccess|type|pluginspage|autoplay],'
@@ -220,6 +219,7 @@ class ApplyTinyMceConfigs
                     foreach ($editorConfigSettings['block_formats'] as $tag => $name) {
                         $blocks[] = $name . '=' . $tag;
                     }
+
                     $formats = implode(';', $blocks);
                     $valids = implode(';', $blocks);
                     $editor->setOptions(
@@ -232,6 +232,7 @@ class ApplyTinyMceConfigs
                 }
             }
         }
+
         $default = Config::inst()->get(HTMLEditorConfigOptions::class, 'main_editor');
         if ($default) {
             HTMLEditorConfig::set_active_identifier($default);
@@ -243,6 +244,7 @@ class ApplyTinyMceConfigs
         if (! is_array($mixed)) {
             $mixed = explode(',', $mixed);
         }
+
         // $mixed = array_map('trim', $mixed);
         // $mixed = array_filter($mixed);
         return $mixed;

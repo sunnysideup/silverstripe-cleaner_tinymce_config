@@ -76,7 +76,7 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
         3:
           - A
           - B
-         - C
+          - C
       lines:
         1:
           - A
@@ -96,7 +96,7 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
         - C
       add_macrons: true
       options:
-        skin: silverstripe'
+        skin: 'silverstripe'
         width: 80ch
       block_formats:
         p: 'paragraph'

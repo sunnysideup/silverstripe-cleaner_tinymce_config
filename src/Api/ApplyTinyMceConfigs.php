@@ -35,7 +35,7 @@ class ApplyTinyMceConfigs
                 ShortcodeParser::get('default')->register(
                     'sitetree_link',
                     function (array $arguments, ?string $content = null, ?ShortcodeParser $parser = null): string {
-                        return \SilverStripe\CMS\Model\SiteTree::link_shortcode_handler($arguments, $content, $parser);
+                        return (string) \SilverStripe\CMS\Model\SiteTree::link_shortcode_handler($arguments, $content, $parser);
                     }
                 );
                 $editor->enablePlugins('charmap', 'fullscreen');

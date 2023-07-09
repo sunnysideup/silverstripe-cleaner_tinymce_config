@@ -17,14 +17,10 @@
         {
             "name": "Nicolaas Francken",
             "email": "modules@sunnysideup.co.nz"
-        },
-        {
-            "name": "Art Karasyov",
-            "email": "modules@sunnysideup.co.nz"
         }
     ],
     "require": {
-        "silverstripe/framework": "^4.0"
+        "silverstripe/framework": "^4.0 || ^5.0"
     },
     "extra": [],
     "autoload": {

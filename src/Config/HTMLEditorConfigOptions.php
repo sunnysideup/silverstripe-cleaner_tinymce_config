@@ -14,7 +14,7 @@ class HTMLEditorConfigOptions
     /**
      * @var string
      */
-    private static $main_editor = 'basic';
+    private static $main_editor = 'cms';
 
     /**
      * @var array
@@ -93,8 +93,8 @@ class HTMLEditorConfigOptions
             'charmap_append' => true,
             'lines' => [
                 1 => [
-                    'formatselect',
-                    'styleselect',
+                    'blocks',
+                    'styles',
                     'removeformat',
                     '|',
                     'bold',
@@ -157,8 +157,8 @@ class HTMLEditorConfigOptions
                 ],
                 2 => [
                     'removeformat',
-                    'formatselect',
-                    'styleselect',
+                    'blocks',
+                    'styles',
                     '|',
                     'bold',
                     'italic',

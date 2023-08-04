@@ -10,6 +10,7 @@ class HtmlEditorAdminExtension extends Extension
 {
     public function init()
     {
-        Injector::inst()->get(ApplyTinyMceConfigs::class)->applyAll();
+        // to do - this module needs work!
+        // Injector::inst()->get(ApplyTinyMceConfigs::class)->applyAll();
     }
 }

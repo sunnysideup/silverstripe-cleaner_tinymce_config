@@ -6,6 +6,6 @@ TinyHandyEditor:
   main_editor: ssu
   editors:
     ssu:
-      line_1: 'formatselect,bold,italic,sslink,unlink'
+      line_1: 'blocks,bold,italic,sslink,unlink'
       line_2: ''
       line_3: ''

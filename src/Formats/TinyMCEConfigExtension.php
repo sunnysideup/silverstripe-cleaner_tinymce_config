@@ -11,7 +11,7 @@ class TinyMCEConfigExtension extends Extension
     {
         $yamlFormats = TinyMCEConfig::config()->get('formats');
 
-        if (!isset($yamlFormats[$identifier])) {
+        if (! isset($yamlFormats[$identifier])) {
             user_error('no editor formats for ' . $identifier);
             return [];
         }
@@ -33,13 +33,12 @@ class TinyMCEConfigExtension extends Extension
                     $title = $sFormat['title'];
                 }
 
-                if (!isset($sFormat['sort'])) {
+                if (! isset($sFormat['sort'])) {
                     $sFormat['sort'] = $sort;
                 }
 
                 $formats[] = ['title' => $title] + $sFormat;
             }
-
 
             usort($formats, function ($x, $y) {
                 return $x['sort'] <=> $y['sort'];
@@ -47,7 +46,7 @@ class TinyMCEConfigExtension extends Extension
 
             $parsedFormats[] = [
                 'title' => $sectionTitle,
-                'items' => $formats
+                'items' => $formats,
             ];
         }
 

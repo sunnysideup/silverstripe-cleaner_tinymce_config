@@ -2,7 +2,7 @@
 name: cleaner_tinymce_config
 ---
 SilverStripe\Forms\HTMLEditor\HTMLEditorField:
-  default_rows: 5
+  default_rows: 12
 
 SilverStripe\Security\Group:
   extensions:

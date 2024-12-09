@@ -6,6 +6,11 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\ORM\DataExtension;
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
 
+/**
+ * Class \Sunnysideup\CleanerTinyMCEConfig\Extensions\GroupEditorConfig
+ *
+ * @property Group|GroupEditorConfig $owner
+ */
 class GroupEditorConfig extends DataExtension
 {
     public function getHtmlEditorConfig()

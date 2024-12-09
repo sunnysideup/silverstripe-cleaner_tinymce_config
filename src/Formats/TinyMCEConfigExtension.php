@@ -5,6 +5,11 @@ namespace Sunnysideup\CleanerTinyMCEConfig\Formats;
 use SilverStripe\Core\Extension;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 
+/**
+ * Class \Sunnysideup\CleanerTinyMCEConfig\Formats\TinyMCEConfigExtension
+ *
+ * @property TinyMCEConfig|TinyMCEConfigExtension $owner
+ */
 class TinyMCEConfigExtension extends Extension
 {
     public static function parse_yaml_formats(string $identifier = 'cms'): array

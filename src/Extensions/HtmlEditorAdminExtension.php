@@ -6,6 +6,11 @@ use SilverStripe\Core\Extension;
 use SilverStripe\Core\Injector\Injector;
 use Sunnysideup\CleanerTinyMCEConfig\Api\ApplyTinyMceConfigs;
 
+/**
+ * Class \Sunnysideup\CleanerTinyMCEConfig\Extensions\HtmlEditorAdminExtension
+ *
+ * @property LeftAndMain|HtmlEditorAdminExtension $owner
+ */
 class HtmlEditorAdminExtension extends Extension
 {
     public function init()

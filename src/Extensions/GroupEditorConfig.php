@@ -3,7 +3,7 @@
 namespace Sunnysideup\CleanerTinyMCEConfig\Extensions;
 
 use SilverStripe\Core\Config\Config;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
 
 /**
@@ -11,7 +11,7 @@ use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
  *
  * @property Group|GroupEditorConfig $owner
  */
-class GroupEditorConfig extends DataExtension
+class GroupEditorConfig extends Extension
 {
     public function getHtmlEditorConfig()
     {

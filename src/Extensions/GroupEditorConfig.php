@@ -4,6 +4,7 @@ namespace Sunnysideup\CleanerTinyMCEConfig\Extensions;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
+use SilverStripe\Security\Group;
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
 
 /**
@@ -15,7 +16,11 @@ class GroupEditorConfig extends Extension
 {
     public function getHtmlEditorConfig()
     {
-        $originalConfig = $this->owner->getField('HtmlEditorConfig');
+        /**
+         * @var Group $owner
+         */
+        $owner = $this->getOwner();
+        $originalConfig = $owner->getField('HtmlEditorConfig');
 
         if ($originalConfig) {
             return $originalConfig;

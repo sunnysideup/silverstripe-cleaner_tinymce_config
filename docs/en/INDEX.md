@@ -1,6 +1,6 @@
 There are three ways to use this module:
 
-### 1. set main editor:
+### 1. set main editor
 
 ```yml
 Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
@@ -11,8 +11,7 @@ This will make all your TinyMCE editors in your project be `basic`.
 
 ### 2. set config for individual editors
 
-If you need different editors for different fields, then you can use configs on a case by case basis. 
-
+If you need different editors for different fields, then you can use configs on a case by case basis.
 
 ```php
 
@@ -42,7 +41,6 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
     }
 
 ```
-
 
 ### 3. add your own recipe (and use as above)
 
@@ -102,6 +100,5 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
         p: 'paragraph'
         
 ```
-
 
 You may also consider using the `onBeforeWrite` method on DataObjects to clear more tags for, for example, inline content.

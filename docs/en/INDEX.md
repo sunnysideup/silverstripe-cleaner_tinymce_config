@@ -96,7 +96,7 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
       options:
         skin: 'silverstripe'
         width: 80ch
-      block_formats:
+      blocks:
         p: 'paragraph'
         
 ```

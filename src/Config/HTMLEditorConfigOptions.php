@@ -47,7 +47,7 @@ class HTMLEditorConfigOptions
      *                 'skin' => 'silverstripe',
      *                 'width' => '80ch',
      *             ],
-     *             'block_formats' => [
+     *             'blocks' => [
      *                 'p' => 'paragraph',
      *                 'p' => 'paragraph',
      *             ]
@@ -71,68 +71,54 @@ class HTMLEditorConfigOptions
             'add_buttons' => [
                 2 => ['fullscreen'],
             ],
-            'block_formats' => [
-                'p' => 'Paragraph',
-                'h1' => 'Heading 1',
-                'h2' => 'Heading 2',
-                'h3' => 'Heading 3',
-                'h4' => 'Heading 4',
-                'h5' => 'Heading 5',
-                'h6' => 'Heading 6',
-                'blockquote' => 'quote',
-            ],
         ],
 
         'inline' => [
             'disabled_plugins' => [
                 'table',
             ],
-            'block_formats' => [
-                'span' => 'span',
-            ],
+            // 'blocks' => [
+            //     'inline html' => 'span',
+            // ],
             'charmap_append' => true,
             'lines' => [
                 1 => [
-                    'blocks',
-                    'styles',
-                    'removeformat',
-                    '|',
                     'bold',
                     'italic',
                     'underline',
                     '|',
+                    'blocks',
+                    'styles',
+                    'removeformat',
+                ],
+                2 => [
                     'sslink',
                     'unlink',
-                    'anchor',
-                    'paste',
                     'pastetext',
-                    '|',
-                    '|',
                     'charmap',
-                    '|',
                     'code',
+                    'fullscreen',
                 ],
             ],
         ],
 
         'paragraphs' => [
             'based_on' => 'inline',
-            'block_formats' => [
+            'blocks' => [
                 'p' => 'paragraph',
             ],
         ],
 
         'heading' => [
             'based_on' => 'inline',
-            'block_formats' => [
+            'blocks' => [
                 'h2' => 'heading',
             ],
         ],
 
         'basic' => [
             'charmap_append' => true,
-            'block_formats' => [
-                'h1' => 'heading 1',
+            'blocks' => [
                 'h2' => 'heading 2',
                 'h3' => 'heading 3',
                 'p' => 'paragraph',

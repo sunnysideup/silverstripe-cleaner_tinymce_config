@@ -102,3 +102,25 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
 ```
 
 You may also consider using the `onBeforeWrite` method on DataObjects to clear more tags for, for example, inline content.
+
+
+Also consider:
+
+```yml
+
+---
+Name: tiny_mce_editor_uset
+---
+
+#first reset the array
+SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
+  editor_css: null
+---
+Name: tiny_mce_editor_set
+---
+#then set our desired files
+SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
+  editor_css:
+    - 'themes/base/dist/editor.css'
+    - 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700'
+```

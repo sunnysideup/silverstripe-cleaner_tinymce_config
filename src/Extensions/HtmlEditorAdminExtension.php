@@ -2,6 +2,7 @@
 
 namespace Sunnysideup\CleanerTinyMCEConfig\Extensions;
 
+use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Core\Extension;
 use SilverStripe\Core\Injector\Injector;
 use Sunnysideup\CleanerTinyMCEConfig\Api\ApplyTinyMceConfigs;

@@ -69,6 +69,7 @@ class HTMLEditorConfigOptions
                 'outdent',
             ],
             'add_buttons' => [
+                1 => ['styles'],
                 2 => ['fullscreen'],
             ],
         ],
@@ -88,10 +89,10 @@ class HTMLEditorConfigOptions
                     'underline',
                     '|',
                     'blocks',
-                    'styles',
                     'removeformat',
                 ],
                 2 => [
+                    'styles',
                     'sslink',
                     'unlink',
                     'pastetext',

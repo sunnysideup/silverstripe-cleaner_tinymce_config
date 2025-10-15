@@ -113,7 +113,7 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
       based_on: basic
       options:
           style_formats:
-          title: Button-Link
-          attributes:
-              class: tiny-mce-button
-          selector: a
+            title: Button-Link
+            attributes:
+                class: tiny-mce-button
+            selector: a

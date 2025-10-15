@@ -95,6 +95,14 @@ class ApplyTinyMceConfigs
                     $editor->setOptions($editorConfigSettings['options']);
                 }
 
+                if (! empty($editorConfigSettings['style_formats'])) {
+                    $editor->setOption('formats', $editorConfigSettings['style_formats']);
+                }
+
+                if (! empty($editorConfigSettings['formats'])) {
+                    $editor->setOptions(['formats' => $editorConfigSettings['formats']]);
+                }
+
                 // block formats
                 if (! empty($editorConfigSettings['blocks'])) {
                     $blocks = $this->stringToArray($editorConfigSettings['blocks']) ?? [];

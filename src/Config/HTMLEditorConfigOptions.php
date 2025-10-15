@@ -65,12 +65,24 @@ class HTMLEditorConfigOptions
         'cms' => [
             'remove_buttons' => [
                 'alignjustify',
-                'indent',
-                'outdent',
+                // 'indent',
+                // 'outdent',
             ],
             'add_buttons' => [
                 1 => ['styles'],
                 2 => ['fullscreen'],
+            ],
+            'formats' => [
+                'alignx' => [
+                    [
+                        'selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,li',
+                        'classes' => 'text-x'
+                    ],
+                    [
+                        'selector' => 'div,ul,ol,table,img,figure',
+                        'classes' => 'x'
+                    ],
+                ]
             ],
         ],
 

@@ -14,7 +14,7 @@ class HTMLEditorConfigOptions
     /**
      * @var string
      */
-    private static $main_editor = 'inline';
+    private static $main_editor = 'cms';
 
     /**
      * @var array
@@ -47,7 +47,7 @@ class HTMLEditorConfigOptions
      *                 'skin' => 'silverstripe',
      *                 'width' => '80ch',
      *             ],
-     *             'block_formats' => [
+     *             'blocks' => [
      *                 'p' => 'paragraph',
      *                 'p' => 'paragraph',
      *             ]
@@ -63,27 +63,26 @@ class HTMLEditorConfigOptions
      */
     private static $editor_configs = [
         'cms' => [
-            'disabled_plugins' => [
-                // 'ssembed',
-                // 'table',
-            ],
             'remove_buttons' => [
                 'alignjustify',
-                'indent',
-                'outdent',
+                // 'indent',
+                // 'outdent',
             ],
             'add_buttons' => [
+                1 => ['styles'],
                 2 => ['fullscreen'],
             ],
-            'block_formats' => [
-                'p' => 'Paragraph',
-                'h1' => 'Heading 1',
-                'h2' => 'Heading 2',
-                'h3' => 'Heading 3',
-                'h4' => 'Heading 4',
-                'h5' => 'Heading 5',
-                'h6' => 'Heading 6',
-                'blockquote' => 'quote',
+            'formats' => [
+                'alignx' => [
+                    [
+                        'selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,li',
+                        'classes' => 'text-x'
+                    ],
+                    [
+                        'selector' => 'div,ul,ol,table,img,figure',
+                        'classes' => 'x'
+                    ],
+                ]
             ],
         ],
 
@@ -91,66 +90,81 @@ class HTMLEditorConfigOptions
             'disabled_plugins' => [
                 'table',
             ],
-            'block_formats' => [
-                'span' => 'span',
-            ],
+            // 'blocks' => [
+            //     'inline html' => 'span',
+            // ],
             'charmap_append' => true,
             'lines' => [
                 1 => [
-                    'formatselect',
-                    'styleselect',
-                    'removeformat',
-                    '|',
                     'bold',
                     'italic',
                     'underline',
                     '|',
+                    'blocks',
+                    'removeformat',
+                ],
+                2 => [
+                    'styles',
                     'sslink',
                     'unlink',
-                    'anchor',
-                    '|',
-                    '|',
-                    'paste',
                     'pastetext',
-                    '|',
                     'charmap',
-                    '|',
-                    'fullscreen',
                     'code',
+                    'fullscreen',
                 ],
             ],
         ],
 
         'paragraphs' => [
             'based_on' => 'inline',
-            'block_formats' => [
+            'blocks' => [
                 'p' => 'paragraph',
             ],
         ],
 
         'heading' => [
             'based_on' => 'inline',
-            'block_formats' => [
+            'blocks' => [
                 'h2' => 'heading',
             ],
         ],
 
         'basic' => [
-            'based_on' => 'inline',
-            'block_formats' => [
-                'h1' => 'heading 1',
+            'charmap_append' => true,
+            'blocks' => [
                 'h2' => 'heading 2',
                 'h3' => 'heading 3',
                 'p' => 'paragraph',
                 'blockquote' => 'quote',
             ],
             'lines' => [
-                2 => [
-                    'bullist',
-                    'numlist',
+                1 => [
+                    'paste',
+                    'pastetext',
                     '|',
                     'ssmedia',
                     'ssembed',
+                    '|',
+                    'sslink',
+                    'unlink',
+                    'anchor',
+                    '|',
+                    'charmap',
+                    '|',
+                    'code',
+                    'fullscreen',
+                ],
+                2 => [
+                    'removeformat',
+                    'blocks',
+                    'styles',
+                    '|',
+                    'bold',
+                    'italic',
+                    'underline',
+                    '|',
+                    'bullist',
+                    'numlist',
                 ],
             ],
         ],
@@ -173,6 +187,7 @@ class HTMLEditorConfigOptions
             if (! empty($entry['based_on']) && ! empty($list[$entry['based_on']])) {
                 $entry = array_merge_recursive($list[$entry['based_on']], $entry);
             }
+
             $list[$key] = $entry;
         }
 

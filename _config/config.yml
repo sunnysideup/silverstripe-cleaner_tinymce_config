@@ -2,7 +2,7 @@
 name: cleaner_tinymce_config
 ---
 SilverStripe\Forms\HTMLEditor\HTMLEditorField:
-  default_rows: 5
+  default_rows: 12
 
 SilverStripe\Security\Group:
   extensions:
@@ -11,3 +11,14 @@ SilverStripe\Security\Group:
 SilverStripe\Admin\LeftAndMain:
   extensions:
     - Sunnysideup\CleanerTinyMCEConfig\Extensions\HtmlEditorAdminExtension
+
+SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
+  extensions:
+    - Sunnysideup\CleanerTinyMCEConfig\Formats\TinyMCEConfigExtension
+
+  # upload_folder_name: 'editor'
+  # formats:
+  #   cms:
+  #     'Test':
+  #       'Test 1':
+  #         block: 'h1'

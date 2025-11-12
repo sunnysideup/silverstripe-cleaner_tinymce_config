@@ -1,6 +1,6 @@
 There are three ways to use this module:
 
-### 1. set main editor:
+### 1. set main editor
 
 ```yml
 Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
@@ -11,8 +11,7 @@ This will make all your TinyMCE editors in your project be `basic`.
 
 ### 2. set config for individual editors
 
-If you need different editors for different fields, then you can use configs on a case by case basis. 
-
+If you need different editors for different fields, then you can use configs on a case by case basis.
 
 ```php
 
@@ -42,7 +41,6 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
     }
 
 ```
-
 
 ### 3. add your own recipe (and use as above)
 
@@ -76,7 +74,7 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
         3:
           - A
           - B
-         - C
+          - C
       lines:
         1:
           - A
@@ -96,12 +94,33 @@ Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions:
         - C
       add_macrons: true
       options:
-        skin: silverstripe'
+        skin: 'silverstripe'
         width: 80ch
-      block_formats:
+      blocks:
         p: 'paragraph'
         
 ```
 
-
 You may also consider using the `onBeforeWrite` method on DataObjects to clear more tags for, for example, inline content.
+
+
+Also consider:
+
+```yml
+
+---
+Name: tiny_mce_editor_uset
+---
+
+#first reset the array
+SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
+  editor_css: null
+---
+Name: tiny_mce_editor_set
+---
+#then set our desired files
+SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
+  editor_css:
+    - 'themes/base/dist/editor.css'
+    - 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700'
+```

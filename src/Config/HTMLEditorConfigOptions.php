@@ -84,6 +84,9 @@ class HTMLEditorConfigOptions
                     ],
                 ]
             ],
+            'options' => [
+                'importcss_append' => true,
+            ],
         ],
 
         'inline' => [

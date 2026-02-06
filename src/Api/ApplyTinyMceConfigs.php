@@ -24,9 +24,9 @@ class ApplyTinyMceConfigs
         $editorConfigs = Injector::inst()->get(HTMLEditorConfigOptions::class)->getEditors();
         $remove = Config::inst()->get(HTMLEditorConfigOptions::class, 'remove_options');
 
-        $adminModule = ModuleLoader::inst()->getManifest()->getModule('silverstripe/admin');
-        $assetsAdminModule = ModuleLoader::inst()->getManifest()->getModule('silverstripe/asset-admin');
-        $cmsModule = ModuleLoader::inst()->getManifest()->getModule('silverstripe/cms');
+        // $adminModule = ModuleLoader::inst()->getManifest()->getModule('silverstripe/admin');
+        // $assetsAdminModule = ModuleLoader::inst()->getManifest()->getModule('silverstripe/asset-admin');
+        // $cmsModule = ModuleLoader::inst()->getManifest()->getModule('silverstripe/cms');
 
         foreach ($editorConfigs as $editorConfigName => $editorConfigSettings) {
             if (! in_array($editorConfigName, $remove, true)) {
@@ -82,8 +82,8 @@ class ApplyTinyMceConfigs
                 if (! empty($editorConfigSettings['lines'])) {
                     $lines = $editorConfigSettings['lines'];
                     for ($i = 1; $i < 4; ++$i) {
-                        $myLine = isset($lines[(int) $i]) ? $this->stringToArray($lines[(int) $i]) : [];
-                        if (!empty($myLine)) {
+                        $myLine = isset($lines[$i]) ? $this->stringToArray($lines[$i]) : [];
+                        if ($myLine !== []) {
                             $editor->setButtonsForLine($i, $myLine);
                         } else {
                             $editor->setButtonsForLine($i, []);
@@ -120,7 +120,7 @@ class ApplyTinyMceConfigs
                 }
                 HTMLEditorConfig::set_config($editorConfigName, $editor);
             } else {
-                HTMLEditorConfig::set_config($editorConfigName, null);
+                HTMLEditorConfig::set_config($editorConfigName);
             }
         }
 

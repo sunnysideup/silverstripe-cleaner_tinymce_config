@@ -2,7 +2,6 @@
 
 namespace Sunnysideup\CleanerTinyMCEConfig\Api;
 
-use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
@@ -10,7 +9,6 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
-use SilverStripe\View\Parsers\ShortcodeParser;
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
 
 class ApplyTinyMceConfigs
@@ -34,7 +32,6 @@ class ApplyTinyMceConfigs
                 $editor = clone TinyMCEConfig::get($basedOn);
 
                 $editor->enablePlugins('charmap', 'fullscreen');
-
 
                 // disable plugins
                 if (! empty($editorConfigSettings['disabled_plugins'])) {

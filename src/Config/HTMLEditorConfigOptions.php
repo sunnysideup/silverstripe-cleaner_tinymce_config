@@ -76,13 +76,13 @@ class HTMLEditorConfigOptions
                 'alignx' => [
                     [
                         'selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,li',
-                        'classes' => 'text-x'
+                        'classes' => 'text-x',
                     ],
                     [
                         'selector' => 'div,ul,ol,table,img,figure',
-                        'classes' => 'x'
+                        'classes' => 'x',
                     ],
-                ]
+                ],
             ],
             'options' => [
                 'importcss_append' => true,

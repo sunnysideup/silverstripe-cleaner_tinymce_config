@@ -6,7 +6,6 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Core\Injector\Injector;
-use SilverStripe\Core\Manifest\ModuleLoader;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
@@ -115,6 +114,7 @@ class ApplyTinyMceConfigs
                         ]
                     );
                 }
+
                 HTMLEditorConfig::set_config($editorConfigName, $editor);
             } else {
                 HTMLEditorConfig::set_config($editorConfigName);
@@ -130,7 +130,7 @@ class ApplyTinyMceConfigs
     protected function stringToArray($mixed): array
     {
         if (! is_array($mixed)) {
-            $mixed = explode(',', $mixed);
+            $mixed = explode(',', (string) $mixed);
         }
 
         // $mixed = array_map('trim', $mixed);

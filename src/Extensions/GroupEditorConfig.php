@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sunnysideup\CleanerTinyMCEConfig\Extensions;
 
 use SilverStripe\Core\Config\Config;

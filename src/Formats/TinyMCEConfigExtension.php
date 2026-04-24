@@ -45,9 +45,7 @@ class TinyMCEConfigExtension extends Extension
                 $formats[] = ['title' => $title] + $sFormat;
             }
 
-            usort($formats, function ($x, $y) {
-                return $x['sort'] <=> $y['sort'];
-            });
+            usort($formats, fn($x, $y) => $x['sort'] <=> $y['sort']);
 
             $parsedFormats[] = [
                 'title' => $sectionTitle,

@@ -8,7 +8,7 @@ use SilverStripe\Core\Extension;
 /**
  * Class \Sunnysideup\CleanerTinyMCEConfig\Formats\TinyMCEConfigExtension
  *
- * @property \SilverStripe\TinyMCE\TinyMCEConfig|TinyMCEConfigExtension $owner
+ * @property TinyMCEConfig|TinyMCEConfigExtension $owner
  */
 class TinyMCEConfigExtension extends Extension
 {

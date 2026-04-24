@@ -2,12 +2,12 @@
 
 namespace Sunnysideup\CleanerTinyMCEConfig\Api;
 
+use SilverStripe\TinyMCE\TinyMCEConfig;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
-use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 use Sunnysideup\CleanerTinyMCEConfig\Config\HTMLEditorConfigOptions;
 
 class ApplyTinyMceConfigs

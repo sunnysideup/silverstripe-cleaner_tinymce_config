@@ -2,13 +2,13 @@
 
 namespace Sunnysideup\CleanerTinyMCEConfig\Formats;
 
+use SilverStripe\TinyMCE\TinyMCEConfig;
 use SilverStripe\Core\Extension;
-use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 
 /**
  * Class \Sunnysideup\CleanerTinyMCEConfig\Formats\TinyMCEConfigExtension
  *
- * @property TinyMCEConfig|TinyMCEConfigExtension $owner
+ * @property \SilverStripe\TinyMCE\TinyMCEConfig|TinyMCEConfigExtension $owner
  */
 class TinyMCEConfigExtension extends Extension
 {

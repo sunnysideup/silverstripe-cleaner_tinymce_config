@@ -2,8 +2,8 @@
 
 namespace Sunnysideup\CleanerTinyMCEConfig\Formats;
 
+use SilverStripe\TinyMCE\TinyMCEConfig;
 use SilverStripe\Core\Extension;
-use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 
 /**
  * Class \Sunnysideup\CleanerTinyMCEConfig\Formats\TinyMCEConfigExtension
@@ -45,9 +45,7 @@ class TinyMCEConfigExtension extends Extension
                 $formats[] = ['title' => $title] + $sFormat;
             }
 
-            usort($formats, function ($x, $y) {
-                return $x['sort'] <=> $y['sort'];
-            });
+            usort($formats, fn($x, $y) => $x['sort'] <=> $y['sort']);
 
             $parsedFormats[] = [
                 'title' => $sectionTitle,

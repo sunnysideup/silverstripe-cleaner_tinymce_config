@@ -14,7 +14,7 @@ use Sunnysideup\CleanerTinyMCEConfig\Api\ApplyTinyMceConfigs;
  */
 class HtmlEditorAdminExtension extends Extension
 {
-    public function init()
+    public function onInit()
     {
         // to do - this module needs work!
         Injector::inst()->get(ApplyTinyMceConfigs::class)->applyAll();

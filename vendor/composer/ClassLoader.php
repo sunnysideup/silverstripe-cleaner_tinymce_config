@@ -12,6 +12,8 @@
 
 namespace Composer\Autoload;
 
+use InvalidArgumentException;
+
 /**
  * ClassLoader implements a PSR-0, PSR-4 and classmap class loader.
  *
@@ -42,37 +44,41 @@ namespace Composer\Autoload;
  */
 class ClassLoader
 {
-    private $vendorDir;
-
     // PSR-4
-    private $prefixLengthsPsr4 = array();
-    private $prefixDirsPsr4 = array();
-    private $fallbackDirsPsr4 = array();
+    private $prefixLengthsPsr4 = [];
+
+    private $prefixDirsPsr4 = [];
+
+    private $fallbackDirsPsr4 = [];
 
     // PSR-0
-    private $prefixesPsr0 = array();
-    private $fallbackDirsPsr0 = array();
+    private $prefixesPsr0 = [];
+
+    private $fallbackDirsPsr0 = [];
 
     private $useIncludePath = false;
-    private $classMap = array();
+
+    private $classMap = [];
+
     private $classMapAuthoritative = false;
-    private $missingClasses = array();
+
+    private $missingClasses = [];
+
     private $apcuPrefix;
 
-    private static $registeredLoaders = array();
+    private static $registeredLoaders = [];
 
-    public function __construct($vendorDir = null)
+    public function __construct(private $vendorDir = null)
     {
-        $this->vendorDir = $vendorDir;
     }
 
     public function getPrefixes()
     {
         if (!empty($this->prefixesPsr0)) {
-            return call_user_func_array('array_merge', array_values($this->prefixesPsr0));
+            return call_user_func_array(array_merge(...), array_values($this->prefixesPsr0));
         }
 
-        return array();
+        return [];
     }
 
     public function getPrefixesPsr4()
@@ -135,6 +141,7 @@ class ClassLoader
 
             return;
         }
+
         if ($prepend) {
             $this->prefixesPsr0[$first][$prefix] = array_merge(
                 (array) $paths,
@@ -156,7 +163,7 @@ class ClassLoader
      * @param array|string $paths   The PSR-4 base directories
      * @param bool         $prepend Whether to prepend the directories
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function addPsr4($prefix, $paths, $prepend = false)
     {
@@ -177,8 +184,9 @@ class ClassLoader
             // Register directories for a new namespace.
             $length = strlen($prefix);
             if ('\\' !== $prefix[$length - 1]) {
-                throw new \InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
+                throw new InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
             }
+
             $this->prefixLengthsPsr4[$prefix[0]][$prefix] = $length;
             $this->prefixDirsPsr4[$prefix] = (array) $paths;
         } elseif ($prepend) {
@@ -219,7 +227,7 @@ class ClassLoader
      * @param string       $prefix The prefix/namespace, with trailing '\\'
      * @param array|string $paths  The PSR-4 base directories
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setPsr4($prefix, $paths)
     {
@@ -228,8 +236,9 @@ class ClassLoader
         } else {
             $length = strlen($prefix);
             if ('\\' !== $prefix[$length - 1]) {
-                throw new \InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
+                throw new InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
             }
+
             $this->prefixLengthsPsr4[$prefix[0]][$prefix] = $length;
             $this->prefixDirsPsr4[$prefix] = (array) $paths;
         }
@@ -304,14 +313,14 @@ class ClassLoader
      */
     public function register($prepend = false)
     {
-        spl_autoload_register(array($this, 'loadClass'), true, $prepend);
+        spl_autoload_register($this->loadClass(...), true, $prepend);
 
         if (null === $this->vendorDir) {
             return;
         }
 
         if ($prepend) {
-            self::$registeredLoaders = array($this->vendorDir => $this) + self::$registeredLoaders;
+            self::$registeredLoaders = [$this->vendorDir => $this] + self::$registeredLoaders;
         } else {
             unset(self::$registeredLoaders[$this->vendorDir]);
             self::$registeredLoaders[$this->vendorDir] = $this;
@@ -323,7 +332,7 @@ class ClassLoader
      */
     public function unregister()
     {
-        spl_autoload_unregister(array($this, 'loadClass'));
+        spl_autoload_unregister($this->loadClass(...));
 
         if (null !== $this->vendorDir) {
             unset(self::$registeredLoaders[$this->vendorDir]);
@@ -343,6 +352,7 @@ class ClassLoader
 
             return true;
         }
+
         return null;
     }
 
@@ -359,9 +369,11 @@ class ClassLoader
         if (isset($this->classMap[$class])) {
             return $this->classMap[$class];
         }
+
         if ($this->classMapAuthoritative || isset($this->missingClasses[$class])) {
             return false;
         }
+
         if (null !== $this->apcuPrefix) {
             $file = apcu_fetch($this->apcuPrefix.$class, $hit);
             if ($hit) {
@@ -406,8 +418,8 @@ class ClassLoader
         $first = $class[0];
         if (isset($this->prefixLengthsPsr4[$first])) {
             $subPath = $class;
-            while (false !== $lastPos = strrpos($subPath, '\\')) {
-                $subPath = substr($subPath, 0, $lastPos);
+            while (false !== $lastPos = strrpos((string) $subPath, '\\')) {
+                $subPath = substr((string) $subPath, 0, $lastPos);
                 $search = $subPath . '\\';
                 if (isset($this->prefixDirsPsr4[$search])) {
                     $pathEnd = DIRECTORY_SEPARATOR . substr($logicalPathPsr4, $lastPos + 1);
@@ -439,7 +451,7 @@ class ClassLoader
 
         if (isset($this->prefixesPsr0[$first])) {
             foreach ($this->prefixesPsr0[$first] as $prefix => $dirs) {
-                if (0 === strpos($class, $prefix)) {
+                if (str_starts_with($class, (string) $prefix)) {
                     foreach ($dirs as $dir) {
                         if (file_exists($file = $dir . DIRECTORY_SEPARATOR . $logicalPathPsr0)) {
                             return $file;

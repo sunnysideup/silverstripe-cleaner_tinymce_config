@@ -22,7 +22,11 @@
   "require": {
     "silverstripe/framework": "^6.0"
   },
-  "extra": [],
+  "extra": {
+    "expose": [
+      "client/js"
+    ]
+  },
   "autoload": {
     "psr-4": {
       "Sunnysideup\\CleanerTinyMCEConfig\\": "src/"

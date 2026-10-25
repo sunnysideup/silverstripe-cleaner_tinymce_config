@@ -3,6 +3,7 @@
 namespace Sunnysideup\CleanerTinyMCEConfig\Api;
 
 use SilverStripe\TinyMCE\TinyMCEConfig;
+use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
@@ -33,10 +34,14 @@ class ApplyTinyMceConfigs
 
                 $editor->enablePlugins('charmap', 'fullscreen');
 
-                // strip inline styles from pasted content (classes are kept)
+                // strip inline styles and classes from content pasted from outside the editor
+                $pasteResource = ModuleResourceLoader::singleton()->resolveResource(
+                    'sunnysideup/cleaner_tinymce_config: client/js/strip-paste-styles.js'
+                );
+                // exposed resources are served as immutable, so bust the cache using the file mtime
                 $editor->enablePlugins([
-                    'strippastestyles' => ModuleResourceLoader::singleton()->resolveResource(
-                        'sunnysideup/cleaner_tinymce_config: client/js/strip-paste-styles.js'
+                    'strippastestyles' => Director::absoluteURL(
+                        $pasteResource->getURL() . '?m=' . (string) @filemtime($pasteResource->getPath())
                     ),
                 ]);
 

@@ -15,6 +15,9 @@ SilverStripe\Admin\LeftAndMain:
 
 
 SilverStripe\TinyMCE\TinyMCEConfig:
+  # height of the editable area = rows x fixed_row_height (in px).
+  # 12 rows x 30px = 360px (the framework default is 20px, which is too small).
+  fixed_row_height: 30
   extensions:
     - Sunnysideup\CleanerTinyMCEConfig\Formats\TinyMCEConfigExtension
 

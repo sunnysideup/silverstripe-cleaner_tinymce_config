@@ -39,9 +39,16 @@ class ApplyTinyMceConfigs
                     'sunnysideup/cleaner_tinymce_config: client/js/strip-paste-styles.js'
                 );
                 // exposed resources are served as immutable, so bust the cache using the file mtime
+                $heightResource = ModuleResourceLoader::singleton()->resolveResource(
+                    'sunnysideup/cleaner_tinymce_config: client/js/fullscreen-restore-height.js'
+                );
                 $editor->enablePlugins([
                     'strippastestyles' => Director::absoluteURL(
                         $pasteResource->getURL() . '?m=' . (string) @filemtime($pasteResource->getPath())
+                    ),
+                    // restores the editor height after leaving full-screen
+                    'fullscreenrestoreheight' => Director::absoluteURL(
+                        $heightResource->getURL() . '?m=' . (string) @filemtime($heightResource->getPath())
                     ),
                 ]);
 

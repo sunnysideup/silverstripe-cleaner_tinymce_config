@@ -12,6 +12,10 @@ SilverStripe\Admin\LeftAndMain:
   extensions:
     - Sunnysideup\CleanerTinyMCEConfig\Extensions\HtmlEditorAdminExtension
 
+# e.g. inline elemental forms (ElementalAreaController) do not extend LeftAndMain
+SilverStripe\Admin\FormSchemaController:
+  extensions:
+    - Sunnysideup\CleanerTinyMCEConfig\Extensions\FormSchemaControllerEditorConfig
 
 
 SilverStripe\TinyMCE\TinyMCEConfig:
